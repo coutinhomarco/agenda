@@ -14,6 +14,8 @@ const create = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   try {
     const {userId} = req.tokenData;
+    const user = await User.findOne({where:{userId}});
+    if (!user) return res.status(404).json({message: 'User not found'});
     await User.destroy({
       where: {
         userId,
