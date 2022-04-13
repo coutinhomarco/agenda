@@ -6,5 +6,6 @@ const contactValidate = require('../middleware/contactValidate');
 
 router.post('/', validateToken,contactValidate.validateContactData, Contact.create);
 router.delete('/:contactId',  Contact.destroy);
+router.get('/', validateToken, Contact.findAll);
 
 module.exports = router

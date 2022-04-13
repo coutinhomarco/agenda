@@ -26,4 +26,14 @@ const destroy = async (req, res, next) => {
   }
 }
 
-module.exports = {create, destroy}
+const findAll = async (req, res, next) => {
+  try {
+    const {userId} = req.tokenData;
+    const contacts = await Contact.findAll({where: {userId}});
+    return res.status(200).json(contacts);
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = {create, destroy, findAll}
