@@ -2,7 +2,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Contact', {
       contactId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         primaryKey: true,
       },
       name: {
@@ -10,7 +10,7 @@ module.exports = {
         allowNull: false,
       },
       email: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       password: {
@@ -18,7 +18,8 @@ module.exports = {
         allowNull: false,
       },
       userId: {
-        type: Sequelize.STRING,
+        allowNull:false,
+        type: Sequelize.INTEGER,
         references: {
           model: 'User',
           key: 'userId',

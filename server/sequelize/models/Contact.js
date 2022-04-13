@@ -6,12 +6,12 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
     },
     userId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
       references: {
-        model: 'Users',
+        model: 'User',
         key: 'userId',
       },
     },
