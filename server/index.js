@@ -5,7 +5,7 @@ const {validateToken} = require('./middleware/auth.js');
 const userValidate = require('./middleware/userValidate.js');
 const contactValidate = require('./middleware/contactValidate.js');
 const {create: createUser, login, destroy: destroyUser} = require('./controllers/User.js');
-const {create: createContact} = require('./controllers/Contact.js');
+const {create: createContact, destroy:destroyContact} = require('./controllers/Contact.js');
 const app = express();
 
 app.use(express.json());
@@ -15,7 +15,8 @@ app.post('/register',userValidate.validateName ,userValidate.validateUserData, u
 app.post('/login', userValidate.validateLogin, login);
 app.delete('/user', validateToken, destroyUser);
 
-app.post('/newcontact', validateToken,contactValidate.validateContactData, createContact);
+app.post('/contact', validateToken,contactValidate.validateContactData, createContact);
+app.delete('/contact/:contactId',  destroyContact);
 
 app.listen(process.env.PORT, () => {
   console.log(process.env.PORT);
