@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Contact = sequelize.define('Contact', {
-    id: {
-      type: DataTypes.STRING,
+    contactId: {
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     email: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     phoneNumber: {
@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     timestamps: false,
+    tableName: 'Contact',
   });
 
   Contact.associate = (models) => {

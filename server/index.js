@@ -1,15 +1,21 @@
 require('dotenv').config();
 const errorHandler = require('./middleware/errorHandler.js');
 const express = require('express');
+const {validateToken} = require('./middleware/auth.js');
 const userValidate = require('./middleware/userValidate.js');
-const {create, login} = require('./controllers/User.js');
+const contactValidate = require('./middleware/contactValidate.js');
+const {create: createUser, login, destroy: destroyUser} = require('./controllers/User.js');
+const {create: createContact} = require('./controllers/Contact.js');
 const app = express();
 
 app.use(express.json());
 app.use(errorHandler);
 
-app.post('/register',userValidate.validateName ,userValidate.validateUserData, userValidate.validateCreate, create);
+app.post('/register',userValidate.validateName ,userValidate.validateUserData, userValidate.validateCreate, createUser);
 app.post('/login', userValidate.validateLogin, login);
+app.delete('/user', validateToken, destroyUser);
+
+app.post('/newcontact', validateToken,contactValidate.validateContactData, createContact);
 
 app.listen(process.env.PORT, () => {
   console.log(process.env.PORT);

@@ -4,6 +4,7 @@ module.exports = {
       contactId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
       },
       name: {
         type: Sequelize.STRING,
@@ -13,7 +14,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      password: {
+      phoneNumber: {
         type: Sequelize.STRING,
         allowNull: false,
       },

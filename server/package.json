@@ -18,7 +18,9 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "drop":"npx sequelize db:drop",
+    "create": "npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all"
   },
   "repository": {
     "type": "git",

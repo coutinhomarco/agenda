@@ -11,6 +11,20 @@ const create = async (req, res, next) => {
   }
 };
 
+const destroy = async (req, res, next) => {
+  try {
+    const {userId} = req.tokenData;
+    await User.destroy({
+      where: {
+        userId,
+      },
+    });
+    return res.status(200).json({message: "User deleted successfully"});
+  } catch (error) {
+    next(error);
+  }
+}
+
 const login = async (req, res, next) => {
   try {
     const {email, password} = req.body;
@@ -20,7 +34,7 @@ const login = async (req, res, next) => {
         password,
       },
     });
-    const token = generateToken({password, email});
+    const token = generateToken({email, userId:user.dataValues.userId});
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -30,4 +44,4 @@ const login = async (req, res, next) => {
   }
 };
 
-module.exports = {create, login}
+module.exports = {create, login, destroy}
