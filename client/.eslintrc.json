@@ -4,9 +4,7 @@
         "es2021": true
     },
     "extends": [
-        "plugin:react/recommended",
-        "airbnb",
-        "trybe-backend"
+        "airbnb"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -19,6 +17,7 @@
         "react"
     ],
     "rules": {
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "no-alert": 0
       }
 }
