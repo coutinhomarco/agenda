@@ -14,18 +14,22 @@ export default function Login() {
     });
   };
   const onSubmit = async (e) => {
-    e.preventDefault();
-    const metodoRequisicao = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...inputData }),
-    };
-    const fetchData = await fetch('http://localhost:3001/user', metodoRequisicao)
-      .then((response) => response.json())
-      .then((json) => json);
-    setToken(fetchData.token);
-    window.alert(fetchData.message);
-    history.push('/agenda');
+    try {
+      e.preventDefault();
+      const metodoRequisicao = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...inputData }),
+      };
+      const fetchData = await fetch('http://localhost:3001/user', metodoRequisicao)
+        .then((response) => response.json())
+        .then((json) => json);
+      setToken(fetchData.token);
+      window.alert(fetchData.message);
+      history.push('/agenda');
+    } catch (error) {
+      window.alert(error);
+    }
   };
   return (
     <div>

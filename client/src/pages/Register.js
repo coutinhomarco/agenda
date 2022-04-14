@@ -11,17 +11,21 @@ export default function Register() {
     });
   };
   const onSubmit = async (e) => {
-    e.preventDefault();
-    const metodoRequisicao = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...inputData }),
-    };
-    const fetchData = await fetch('http://localhost:3001/user/register', metodoRequisicao)
-      .then((response) => response.json())
-      .then((json) => json);
-    window.alert(fetchData.message);
-    history.push('/');
+    try {
+      e.preventDefault();
+      const metodoRequisicao = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...inputData }),
+      };
+      const fetchData = await fetch('http://localhost:3001/user/register', metodoRequisicao)
+        .then((response) => response.json())
+        .then((json) => json);
+      window.alert(fetchData.message);
+      history.push('/');
+    } catch (error) {
+      window.alert(error);
+    }
   };
   return (
     <form className="login-form" onChange={onChange} onSubmit={onSubmit}>
