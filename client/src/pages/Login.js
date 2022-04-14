@@ -32,22 +32,22 @@ export default function Login() {
     }
   };
   return (
-    <div>
+    <div className="main">
       <h1>
         Login
       </h1>
-      <form className="login-form" onChange={onChange} onSubmit={onSubmit}>
-        <label htmlFor="email">
-          <input name="email" id="email" type="email" placeholder="Email" />
+      <form className="login-form input-group" onChange={onChange} onSubmit={onSubmit}>
+        <label className="form-label" htmlFor="email">
+          <input className="form-control" name="email" id="email" type="email" placeholder="Email" />
         </label>
-        <label htmlFor="password">
-          <input name="password" id="password" type="password" placeholder="Password" />
+        <label className="form-label" htmlFor="password">
+          <input className="form-control" name="password" id="password" type="password" placeholder="Password" />
         </label>
-        <div>
+        <div className="flex btn-div">
           <Link to="/register">
-            <button type="button">Create new account</button>
+            <button className="btn btn-secondary" type="button">Create new account</button>
           </Link>
-          <button type="submit">Log in</button>
+          <button className="btn btn-primary login-btn" type="submit">Log in</button>
         </div>
       </form>
     </div>

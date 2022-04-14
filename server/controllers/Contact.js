@@ -3,8 +3,8 @@ const {Contact} = require("../sequelize/models");
 const create = async (req, res, next) => {
   try {
     const {name, email, phoneNumber, userId} = req.body;
-    await Contact.create({name, email, phoneNumber, userId})
-    return res.status(201).json({message: "Contact created successfully"});
+    const contact = await Contact.create({name, email, phoneNumber, userId})
+    return res.status(201).json({message: "Contact created successfully", data: contact});
   } catch (error) {
     next(error);
   }

@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
 .App {
+  height: 100vh;
   text-align: center;
 }
 
@@ -14,13 +16,55 @@
   color: white;
 }
 
-.login-form {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
+.App > div {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+body{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.main {
+  height: 100vh;
+  display: flex;
   margin: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+}
+
+.main > h1 {
+  font-size: 1.7rem;
+  margin-bottom: 1rem;
+}
+
+
+.btn-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.login-form {
+  flex-direction: column;
+  max-width: fit-content;
+  padding: 15px;
+}
+
+.login-btn{
+  margin-left: 5px;
+  height: 38px;
+  width: 100px;
 }
 
 .login-form input {
   margin-bottom: 10px;
+}
+
+.input-group{
+  justify-items: stretch;
 }
