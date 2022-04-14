@@ -13,12 +13,12 @@ export default function Register() {
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
-      const metodoRequisicao = {
+      const fetchMethod = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...inputData }),
       };
-      const fetchData = await fetch('http://localhost:3001/user/register', metodoRequisicao)
+      const fetchData = await fetch('http://localhost:3001/user/register', fetchMethod)
         .then((response) => response.json())
         .then((json) => json);
       window.alert(fetchData.message);
