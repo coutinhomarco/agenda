@@ -1,10 +1,28 @@
 import React, { useState, useContext } from 'react';
+import { toast } from 'react-toastify';
 import Context from '../context/Context';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function NewContact() {
   const { contacts, setContacts, token } = useContext(Context);
-  const [inputData, setInputData] = useState();
-
+  const [inputData, setInputData] = useState({ name: '', email: '', phoneNumber: '' });
+  const toastOption = {
+    position: 'top-right',
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
+  const validateForm = () => {
+    const data = { ...inputData };
+    const regex = /[\w]+@[\w]+.com/i;
+    if (data.phoneNumber.length >= 8 && regex.test(data.email) && data.name.length > 2) {
+      return false;
+    }
+    return true;
+  };
   const handleChange = (e) => {
     setInputData({
       ...inputData,
@@ -22,14 +40,14 @@ export default function NewContact() {
       const fetchData = await fetch('http://localhost:3001/contact', fetchMethod)
         .then((response) => response.json())
         .then((json) => json);
-      window.alert(fetchData.message);
+      toast.success(fetchData.message, toastOption);
       setContacts([...contacts, fetchData.data]);
     } catch (error) {
-      window.alert(error);
+      toast.fail(error.message, toastOption);
     }
   };
   return (
-    <form className="login-form input-group" onChange={handleChange} onSubmit={handleSubmit}>
+    <form className="agenda-form  input-group" onChange={handleChange} onSubmit={handleSubmit}>
       <label className="form-label" htmlFor="name">
         <input className="form-control" name="name" id="name" type="text" placeholder="Name" />
       </label>
@@ -39,7 +57,7 @@ export default function NewContact() {
       <label className="form-label" htmlFor="phoneNumber">
         <input className="form-control" name="phoneNumber" id="phoneNumber" type="text" placeholder="Phone number" />
       </label>
-      <button className="btn btn-primary" type="submit">Add contact</button>
+      <button disabled={validateForm()} className="btn btn-primary" type="submit">Add contact</button>
     </form>
   );
 }

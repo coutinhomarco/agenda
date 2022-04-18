@@ -10,13 +10,13 @@ const validateName = async (req, res, next) => {
 const validateUserData = async (req, res, next) => {
   const regex = /[\w]+@[\w]+.com/i;
   const { email, password } = req.body;
-  if (!email || !password) {
+  if (!email || !password || email === '' || password === '') {
     return res.status(400).json({ message: 'Email and password are required' });
   }
+  if (!regex.test(email)) return res.status(400).json({ message: '"email" must be a valid email' });
   if (password.length < 8) {
     return res.status(400).json({ message: 'Password must be at least 8 characters long' });
   }
-  if (!regex.test(email)) return res.status(400).json({ message: '"email" must be a valid email' });
   next();
 }
 

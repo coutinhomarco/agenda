@@ -5,12 +5,12 @@ module.exports = {
       {
         name: 'John Doe',
         email: 'test@medium.com',
-        password: '123456',
+        password: '12345678',
       },
       {
         name: 'John Travolta',
         email: 'test2@medium.com',
-        password: '123456',
+        password: '12345678',
       }
     ], {}),
 

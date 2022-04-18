@@ -55,6 +55,12 @@ body{
   padding: 15px;
 }
 
+.agenda-form {
+  flex-direction: column;
+  padding: 15px;
+}
+
+
 .login-btn{
   margin-left: 5px;
   height: 38px;
@@ -67,4 +73,20 @@ body{
 
 .input-group{
   justify-items: stretch;
+}
+
+aside form{
+  width: 100vh;
+}
+
+.agenda-main{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.center{
+  justify-self: center;
 }
