@@ -1,4 +1,3 @@
 # EM CONSTRUÇÃO
 Aplicação Fullstack que representa uma agenda telefonica
-
-Na pasta server ficam todos arquivos e configurações do Back End e na pasta client fica tudo do front
+Para aprender a rodar a aplicação acesse as pastar server e client
