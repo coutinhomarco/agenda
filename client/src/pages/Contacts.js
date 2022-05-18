@@ -7,7 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Agenda() {
   const [newContact, setNewContact] = useState(false);
-  const { token, contacts, setContacts } = useContext(Context);
+  const {
+    token, contacts, setContacts, userDetails,
+  } = useContext(Context);
   const toastOption = {
     position: 'top-right',
     autoClose: 5000,
@@ -38,7 +40,10 @@ export default function Agenda() {
   return (
     <>
       <header className="agenda-header">
-        <h1>Contacts</h1>
+        <h1>
+          {userDetails.name}
+          `s contacts
+        </h1>
         <button className="btn btn-primary" onClick={handleClick} type="button">New contact</button>
       </header>
       <main>

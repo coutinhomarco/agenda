@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
   const [inputData, setInputData] = useState({ password: '', email: '' });
-  const { setToken } = useContext(Context);
+  const { setToken, setUserDetails } = useContext(Context);
 
   const toastOption = {
     position: 'top-right',
@@ -49,6 +49,7 @@ export default function Login() {
       if (!fetchData.token) { return toast.error(fetchData.message, toastOption); }
       toast.success(fetchData.message, toastOption);
       if (fetchData.token) {
+        setUserDetails(fetchData.userDetails);
         localStorage.setItem('token', fetchData.token);
         history.push('/contacts');
       }

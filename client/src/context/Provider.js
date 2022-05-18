@@ -6,12 +6,16 @@ import Context from './Context';
 export default function Provider({ children }) {
   const [token, setToken] = useState();
   const [contacts, setContacts] = useState([]);
+  const [userDetails, setUserDetails] = useState({});
 
   const CONTEXT_VALUE = {
+
     token,
     setToken,
     contacts,
     setContacts,
+    userDetails,
+    setUserDetails,
   };
 
   return (

@@ -36,11 +36,14 @@ const login = async (req, res, next) => {
         password,
       },
     });
-    const token = generateToken({email, userId:user.dataValues.userId});
+    const token = generateToken({email, userId:user.dataValues.userId, name: user.dataValues.name});
+    const userDetails = {
+      ...user.dataValues,
+    }
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    return res.status(200).json({token, message: "User logged in successfully"});
+    return res.status(200).json({token, message: "User logged in successfully", userDetails});
   } catch (error) {
     next(error);
   }
