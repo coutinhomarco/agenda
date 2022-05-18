@@ -50,7 +50,7 @@ export default function Login() {
       toast.success(fetchData.message, toastOption);
       if (fetchData.token) {
         localStorage.setItem('token', fetchData.token);
-        history.push('/agenda');
+        history.push('/contacts');
       }
     } catch (error) {
       toast.error(error.message, toastOption);

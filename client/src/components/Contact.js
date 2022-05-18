@@ -23,11 +23,11 @@ export default function Contact({ name, email, phoneNumber }) {
               {` ${email}`}
             </p>
             <p>
-              Phone number:
+              Phone:
               {` ${phoneNumber}`}
             </p>
           </>
-        ) : <p className="bold">{name}</p>
+        ) : <p className="contact-name">{name}</p>
       }
     </div>
   );
