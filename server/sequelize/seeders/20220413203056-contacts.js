@@ -17,7 +17,29 @@ module.exports = {
         name: 'Bruno Rodrigues',
         email: "brunorodrigues@yahoo.com",
         phoneNumber: "98765432511",
-        userId: 2,},
+        userId: 2,
+      }, {
+        name: 'João da Silva',
+        email: "joaodasilva@gmail.com",
+        phoneNumber: "987654321",
+        userId: 2,
+      }, {
+        name: 'Maria da Silva',
+        email: "mariazinha@gamil.com",
+        phoneNumber: "987654321",
+        userId: 1,
+      }, {
+        name: 'William Dafoe',
+        email: "williamdafoe@outlook.com"
+        ,
+        phoneNumber: "987654321",
+        userId: 2,
+      }, {
+        name: 'Givanildo',
+        email: "hulkparaiba@outlook.com",
+        phoneNumber: "987654321",
+        userId: 1,
+      }
   ], {});
 
   },

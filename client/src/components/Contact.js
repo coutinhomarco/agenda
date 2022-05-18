@@ -10,24 +10,24 @@ export default function Contact({ name, email, phoneNumber }) {
     setClicked(!clicked);
   };
   return (
-    <div role="cell" onClick={handleClick}>
+    <div role="cell" onClick={handleClick} className="contact-card">
       {
         clicked ? (
           <>
             <p>
               Name:
-              <span>{name}</span>
+              {` ${name}`}
             </p>
             <p>
               Email:
-              <span>{email}</span>
+              {` ${email}`}
             </p>
             <p>
               Phone number:
-              <span>{phoneNumber}</span>
+              {` ${phoneNumber}`}
             </p>
           </>
-        ) : <p>{name}</p>
+        ) : <p className="bold">{name}</p>
       }
     </div>
   );

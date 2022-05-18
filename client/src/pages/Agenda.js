@@ -37,14 +37,16 @@ export default function Agenda() {
   };
   return (
     <main>
-      <h1>Agenda</h1>
-      <button className="btn btn-secondary" onClick={handleClick} type="button">New contact</button>
+      <header className="agenda-header">
+        <h1>Agenda</h1>
+        <button className="btn btn-secondary" onClick={handleClick} type="button">New contact</button>
+      </header>
       <div className="agenda-main">
-        <aside>
-          {newContact && (
-          <NewContact />
-          )}
-        </aside>
+        {newContact && (
+          <section>
+            <NewContact />
+          </section>
+        )}
         <section className="center">
           {contacts.map(({ name, email, phoneNumber }) => (
             <Contact name={name} email={email} phoneNumber={phoneNumber} />))}

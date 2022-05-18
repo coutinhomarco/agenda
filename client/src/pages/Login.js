@@ -59,7 +59,7 @@ export default function Login() {
   return (
     <div className="main">
       <h1>
-        Login
+        Your Agenda
       </h1>
       <form className="login-form input-group" onChange={onChange} onSubmit={onSubmit}>
         <label className="form-label" htmlFor="email">

@@ -1,9 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: #333;
+  background-color: #fafafa;
+}
 .App {
   height: 100vh;
   text-align: center;
 }
 
+main{
+  background-color: #f5f0f0;
+}
 
 .App-header {
   background-color: #282c34;
@@ -38,10 +47,15 @@ body{
 }
 
 .main > h1 {
-  font-size: 1.7rem;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
 }
 
+.bold {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
 
 .btn-div{
   display: flex;
@@ -57,7 +71,8 @@ body{
 
 .agenda-form {
   flex-direction: column;
-  padding: 15px;
+  margin-bottom: 1vh;
+  width: 20vw;
 }
 
 
@@ -75,18 +90,35 @@ body{
   justify-items: stretch;
 }
 
-aside form{
-  width: 100vh;
+
+.contact-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25vw;
+  height: 100%;
+  background-color: #282c34;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
+.agenda-header{
+  margin-top: 10vh;
+  margin-bottom: 2.5vh;
 }
 
 .agenda-main{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  /* height: 50vh; */
   width: 100%;
 }
 
 .center{
   justify-self: center;
+  align-self: center;
 }
