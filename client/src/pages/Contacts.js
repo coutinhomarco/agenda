@@ -5,6 +5,7 @@ import Contact from '../components/Contact';
 import NewContact from '../components/NewContact';
 import Context from '../context/Context';
 import 'react-toastify/dist/ReactToastify.css';
+import toastOption from '../toastifyOptions';
 
 export default function Agenda() {
   const [newContact, setNewContact] = useState(false);
@@ -12,15 +13,6 @@ export default function Agenda() {
     token, contacts, setContacts, userDetails, setToken, setUserDetails,
   } = useContext(Context);
   const history = useHistory();
-  const toastOption = {
-    position: 'top-right',
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  };
 
   useEffect(async () => {
     try {

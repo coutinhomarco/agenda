@@ -2,19 +2,12 @@ import React, { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
 import Context from '../context/Context';
 import 'react-toastify/dist/ReactToastify.css';
+import toastOption from '../toastifyOptions';
 
 export default function NewContact() {
   const { contacts, setContacts, token } = useContext(Context);
   const [inputData, setInputData] = useState({ name: '', email: '', phoneNumber: '' });
-  const toastOption = {
-    position: 'top-right',
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  };
+
   const validateForm = () => {
     const data = { ...inputData };
     const regex = /[\w]+@[\w]+.com/i;

@@ -4,21 +4,13 @@ import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import React, { useState, useContext } from 'react';
 import Context from '../context/Context';
+import toastOption from '../toastifyOptions';
 
 export default function Contact({
   name, email, phoneNumber, contactId,
 }) {
   const [clicked, setClicked] = useState(false);
   const { token, setContacts, contacts } = useContext(Context);
-  const toastOption = {
-    position: 'top-right',
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  };
 
   const handleClick = async () => {
     setClicked(!clicked);

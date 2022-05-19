@@ -3,19 +3,12 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import toastOption from '../toastifyOptions';
 
 export default function Register() {
   const [inputData, setInputData] = useState({ password: '', email: '', name: '' });
   const history = useHistory();
-  const toastOption = {
-    position: 'top-right',
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  };
+
   const validateForm = () => {
     const regex = /[\w]+@[\w]+.com/i;
     if (inputData.password.length >= 8

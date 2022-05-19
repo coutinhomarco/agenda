@@ -3,20 +3,11 @@ import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Context from '../context/Context';
 import 'react-toastify/dist/ReactToastify.css';
+import toastOption from '../toastifyOptions';
 
 export default function Login() {
   const [inputData, setInputData] = useState({ password: '', email: '' });
   const { setToken, setUserDetails } = useContext(Context);
-
-  const toastOption = {
-    position: 'top-right',
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  };
 
   const history = useHistory();
 
