@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 import Contact from '../components/Contact';
 import NewContact from '../components/NewContact';
 import Context from '../context/Context';
@@ -8,11 +9,12 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Agenda() {
   const [newContact, setNewContact] = useState(false);
   const {
-    token, contacts, setContacts, userDetails,
+    token, contacts, setContacts, userDetails, setToken,
   } = useContext(Context);
+  const history = useHistory();
   const toastOption = {
     position: 'top-right',
-    autoClose: 5000,
+    autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -31,8 +33,19 @@ export default function Agenda() {
       toast.error(error.message, toastOption);
     }
   }, []);
-  const handleClick = async () => {
+  const handleContactClick = async () => {
     setNewContact(!newContact);
+  };
+
+  const handleLogout = async () => {
+    try {
+      setToken(undefined);
+      localStorage.removeItem('token');
+      toast.success('Logout Successful', toastOption);
+      history.push('/');
+    } catch (error) {
+      toast.error(error.message, toastOption);
+    }
   };
   return (
     <>
@@ -41,7 +54,9 @@ export default function Agenda() {
           {userDetails.name}
           &apos;s contacts
         </h1>
-        <button className="btn btn-primary" onClick={handleClick} type="button">New contact</button>
+        <button className="btn btn-primary" onClick={handleContactClick} type="button">New contact</button>
+        <button className="btn btn-danger" onClick={handleLogout} type="button">Log out</button>
+
       </header>
       <main>
         <div className="agenda-main">

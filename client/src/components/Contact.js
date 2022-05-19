@@ -25,14 +25,10 @@ export default function Contact({
   };
   const handleDelete = async () => {
     try {
-      const fetchData = await fetch(`http://localhost:3001/contact/${contactId}`, {
+      await fetch(`http://localhost:3001/contact/${contactId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
-      const jsonData = await fetchData.json();
-      if (jsonData.message) {
-        toast.success(jsonData.message, toastOption);
-      }
       const newList = contacts.filter(({ contactId: id }) => id !== contactId);
       setContacts(newList);
     } catch (error) {
