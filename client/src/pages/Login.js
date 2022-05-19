@@ -44,15 +44,13 @@ export default function Login() {
       const fetchData = await fetch('http://localhost:3001/user', fetchMethod)
         .then((response) => response.json())
         .then((json) => json);
-      setToken(fetchData.token);
-
       if (!fetchData.token) { return toast.error(fetchData.message, toastOption); }
+      setToken(fetchData.token);
       toast.success(fetchData.message, toastOption);
-      if (fetchData.token) {
-        setUserDetails(fetchData.userDetails);
-        localStorage.setItem('token', fetchData.token);
-        history.push('/contacts');
-      }
+      setUserDetails(fetchData.userDetails);
+      localStorage.setItem('token', fetchData.token);
+      localStorage.setItem('userDetails', JSON.stringify(fetchData.userDetails));
+      history.push('/contacts');
     } catch (error) {
       toast.error(error.message, toastOption);
     }

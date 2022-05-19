@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Agenda() {
   const [newContact, setNewContact] = useState(false);
   const {
-    token, contacts, setContacts, userDetails, setToken,
+    token, contacts, setContacts, userDetails, setToken, setUserDetails,
   } = useContext(Context);
   const history = useHistory();
   const toastOption = {
@@ -24,11 +24,14 @@ export default function Agenda() {
 
   useEffect(async () => {
     try {
-      if (token) {
-        const fetchData = await fetch('http://localhost:3001/contact', { headers: { Authorization: `Bearer ${token}` } });
-        const jsonData = await fetchData.json();
-        setContacts(jsonData);
+      const localToken = localStorage.getItem('token');
+      const fetchData = await fetch('http://localhost:3001/contact', { headers: { Authorization: `Bearer ${token || localToken}` } });
+      const jsonData = await fetchData.json();
+      if (!userDetails.name) {
+        const localUserDetails = localStorage.getItem('userDetails');
+        setUserDetails(JSON.parse(localUserDetails));
       }
+      setContacts(jsonData);
     } catch (error) {
       toast.error(error.message, toastOption);
     }
@@ -41,6 +44,7 @@ export default function Agenda() {
     try {
       setToken(undefined);
       localStorage.removeItem('token');
+      localStorage.removeItem('userDetails');
       toast.success('Logout Successful', toastOption);
       history.push('/');
     } catch (error) {
