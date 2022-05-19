@@ -3,8 +3,18 @@
 
 
 Aplicação Fullstack que representa uma agenda telefonica.
+````bash
+# Clone este repositório
+# Foi utilizado SSH
+$ git clone git@github.com:coutinhomarco/agenda.git
+
+Recomendo a utilizacao de dois terminais (um para cada parte)
 ````
-Acesse as pastas client e server para receber instruções em como rodar o front end e back end respectivamente.
+
+````
+Acesse as pastas client e server 
+para receber instruções em como rodar o front end e back end 
+respectivamente.
 ````
 
 Funcionalidades implementadas:
