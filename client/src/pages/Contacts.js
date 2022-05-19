@@ -25,7 +25,6 @@ export default function Agenda() {
       if (token) {
         const fetchData = await fetch('http://localhost:3001/contact', { headers: { Authorization: `Bearer ${token}` } });
         const jsonData = await fetchData.json();
-        console.log(jsonData);
         setContacts(jsonData);
       }
     } catch (error) {
