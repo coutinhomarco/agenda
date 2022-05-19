@@ -8,6 +8,8 @@
     <li>React Router Dom</li>
     <li>FullCalendar</li>
     <li>Jest</li>
+    <li>Bootstrap</li>
+
 
 </ul>
 <hr>
