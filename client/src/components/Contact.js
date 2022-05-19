@@ -22,6 +22,7 @@ export default function Contact({
         headers: { Authorization: `Bearer ${token}` },
       });
       const newList = contacts.filter(({ contactId: id }) => id !== contactId);
+      toast.success('Contact deleted successfully', toastOption);
       setContacts(newList);
     } catch (error) {
       toast.error(error.message, toastOption);

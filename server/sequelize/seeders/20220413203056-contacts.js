@@ -3,40 +3,58 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
 
-    await queryInterface.bulkInsert('Contact', [{
-      name: 'Marco Coutinho',
-      email: "marco@gmail.com",
-      phoneNumber: "1234567890",
-      userId: 1,
-    }, {
-      name: 'Ana lúcia',
-      email: "analucia@outlook.com",
-      phoneNumber: "987654321",
-      userId: 1,},
+    await queryInterface.bulkInsert('Contact', 
+      [{
+        name: 'Justin Bieber',
+        email: "justin@gmail.com",
+        phoneNumber: "1234567890",
+        userId: 1,
+      }, 
       {
-        name: 'Bruno Rodrigues',
-        email: "brunorodrigues@yahoo.com",
+        name: 'Danny Carey',
+        email: "octopus@toolband.com",
+        phoneNumber: "987654321",
+        userId: 1,},
+      {
+        name: 'Robert Downey Jr.',
+        email: "downeyjr@yahoo.com",
         phoneNumber: "98765432511",
         userId: 2,
-      }, {
-        name: 'João da Silva',
-        email: "joaodasilva@gmail.com",
+      }, 
+      {
+        name: 'Tupac Shakur',
+        email: "tupac@gmail.com",
         phoneNumber: "987654321",
         userId: 2,
-      }, {
-        name: 'Maria da Silva',
-        email: "mariazinha@gamil.com",
+      }, 
+      {
+        name: 'Neymar Jr',
+        email: "meninoney@gmail.com",
         phoneNumber: "987654321",
         userId: 1,
-      }, {
+      }, 
+      {
         name: 'William Dafoe',
         email: "williamdafoe@outlook.com"
         ,
         phoneNumber: "987654321",
         userId: 2,
-      }, {
+      }, 
+      {
         name: 'Givanildo',
         email: "hulkparaiba@outlook.com",
+        phoneNumber: "987654321",
+        userId: 1,
+      },
+      {
+        name: 'Jorge',
+        email: "jorge@lateral.com",
+        phoneNumber: "987654321",
+        userId: 1,
+      },
+      {
+        name: 'Matias Zaracho',
+        email: "zaracho@galodoido.com",
         phoneNumber: "987654321",
         userId: 1,
       }

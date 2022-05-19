@@ -23,7 +23,7 @@ export default function Agenda() {
         const localUserDetails = localStorage.getItem('userDetails');
         setUserDetails(JSON.parse(localUserDetails));
       }
-      setContacts(jsonData);
+      setContacts(jsonData.sort((a, b) => (a.name > b.name ? 1 : -1)));
     } catch (error) {
       toast.error(error.message, toastOption);
     }
