@@ -10,6 +10,7 @@ const generateToken = (payload = {}) => jwt.sign({ data: payload }, SECRET, jwtC
 const validateToken = async (req, res, next) => {
   try {
     const { authorization } = await req.headers;   
+    if (!authorization) return res.status(401).json({ message: 'Unauthorized' });
     const token = authorization.split(' ')[1];
     if (!token) return res.status(401).json({ message: 'Token not found' });
     const decoded = jwt.verify(token, process.env.JWT_SECRET);

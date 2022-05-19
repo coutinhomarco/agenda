@@ -25,9 +25,7 @@ export default function Agenda() {
       if (token) {
         const fetchData = await fetch('http://localhost:3001/contact', { headers: { Authorization: `Bearer ${token}` } });
         const jsonData = await fetchData.json();
-        if (jsonData.message) {
-          toast.success(fetchData.message, toastOption);
-        }
+        console.log(jsonData);
         setContacts(jsonData);
       }
     } catch (error) {
@@ -42,7 +40,7 @@ export default function Agenda() {
       <header className="agenda-header">
         <h1>
           {userDetails.name}
-          `s contacts
+          &apos;s contacts
         </h1>
         <button className="btn btn-primary" onClick={handleClick} type="button">New contact</button>
       </header>
@@ -54,8 +52,17 @@ export default function Agenda() {
           </section>
           )}
           <aside className="center">
-            {contacts.map(({ name, email, phoneNumber }) => (
-              <Contact name={name} email={email} phoneNumber={phoneNumber} />))}
+            {contacts.map(({
+              name, email, phoneNumber, contactId,
+            }) => (
+              <Contact
+                key={contactId}
+                name={name}
+                email={email}
+                phoneNumber={phoneNumber}
+                contactId={contactId}
+              />
+            ))}
           </aside>
         </div>
       </main>
