@@ -37,16 +37,8 @@ $ npm run dev
 
 <h1>Endpoints:</h1>
 
-<h2>Login</h2>
-Login realizado com sucesso
-<img width="70%" src="./images/login.png">
-<br>
-Senha menor que 8 caracteres
-<img width="70%" src="./images/passwordleast8.png">
-<br>
-Senha incorreta
-<img width="70%" src="./images/invalidcredentials.png">
-<br>
-Email invalido
-<img width="70%" src="./images/invalidemail.png">
-<br>
+````
+Acesse
+localhost:3001/api-docs
+para ver a documentação
+````
