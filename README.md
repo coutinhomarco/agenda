@@ -8,7 +8,7 @@ Aplicação Fullstack que representa uma agenda telefonica.
 # Foi utilizado SSH
 $ git clone git@github.com:coutinhomarco/agenda.git
 
-Recomendo a utilizacao de dois terminais (um para cada parte)
+Recomendo a utilização de dois terminais (um para cada parte)
 ````
 
 ````
@@ -19,8 +19,8 @@ respectivamente.
 
 Funcionalidades implementadas:
 <ol>
-    <li>Sistema de cadastro e login utilizando autenticacao com JWTOKEN ✅</li>
-    <li>Sistema de cadastro e delecao de contatos por usuario ✅</li>
+    <li>Sistema de cadastro e login utilizando autenticação com JWTOKEN ✅</li>
+    <li>Sistema de cadastro e deleção de contatos por usuario ✅</li>
     <li>Calendario com tasks relacionadas aos contatos 🔧</li>
     <li>Testes de front e back 🔧</li>
 </ol>
