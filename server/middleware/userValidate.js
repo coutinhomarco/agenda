@@ -41,7 +41,6 @@ const validateLogin = async (req, res, next) => {
     const user = await User.findOne({
       where: {
         email: req.body.email,
-        password: req.body.password,
       },
     });
     if (!user) {

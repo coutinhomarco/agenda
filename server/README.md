@@ -34,3 +34,13 @@ $ npm run drop
 $ npm run dev
 
 ```
+
+<h1>Endpoints:</h1>
+
+<h2>Login</h2>
+Login realizado com sucesso
+<img src="./images/login.png">
+Senha menor que 8 caracteres
+<img src="./images/passwordleast8.png">
+Senha incorreta
+<img src="./images/invalidcredentials.png">

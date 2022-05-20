@@ -33,16 +33,14 @@ const login = async (req, res, next) => {
     const user = await User.findOne({
       where: {
         email,
-        password,
       },
     });
-    const token = generateToken({email, userId:user.dataValues.userId, name: user.dataValues.name});
+    console.log(user);
+    if (user.dataValues.password !== password) return res.status(401).json({message: 'Invalid credentials'});
     const userDetails = {
-      ...user.dataValues,
+      email, userId:user.dataValues.userId, name: user.dataValues.name
     }
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
+    const token = generateToken(userDetails);
     return res.status(200).json({token, message: "User logged in successfully", userDetails});
   } catch (error) {
     next(error);
