@@ -24,17 +24,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "format": "email"
-                                    },
-                                    "password": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": ["email", "password"]
+                                "$ref": "#/components/schemas/userLogin"
                             }
                         }
                     }
@@ -45,45 +35,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "token": {
-                                            "type": "string"
-                                        },
-                                        "userDetails": {
-                                            "type": "object",
-                                            "properties": {
-                                                "userId": {
-                                                    "type": "string"
-                                                },
-                                                "name": {
-                                                    "type": "string"
-                                                },
-                                                "email": {
-                                                    "type": "string"
-                                                }
-                                                
-                                            }
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Erro ao realizar login",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/loginSucess"
                                 }
                             }
                         }
@@ -93,12 +45,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/loginErrorCredentials"
                                 }
                             }
                         }
@@ -108,12 +55,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/loginErrorUserNotFound"
                                 }
                             }
                         }
@@ -121,6 +63,16 @@
                 }
             },
             "delete":{
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "summary": "Deleta usuário",
                 "headers": {
                     "Authorization": {
@@ -137,17 +89,12 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Deletado com sucesso",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/userDeleteSucess"
                                 }
                             }
                         }
@@ -157,12 +104,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/userDeleteErrorNotFound"
                                 }
                             }
                         }
@@ -172,12 +114,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/userDeleteErrorCredentials"
                                 }
                             }
                         }
@@ -192,20 +129,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "name": {
-                                            "type": "string"
-                                        },
-                                        "email": {
-                                            "type": "string",
-                                            "format": "email"
-                                        },
-                                        "password": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": ["name", "email", "password"]
+                                    "$ref": "#/components/schemas/userRegister"
                                 }
                             }
                         }
@@ -216,12 +140,7 @@
                             "content": {
                                 "application/json": {
                                     "schema": {
-                                        "type": "object",
-                                        "properties": {
-                                            "message": {
-                                                "type": "string"
-                                            }
-                                        }
+                                        "$ref": "#/components/schemas/userRegisterSucess"
                                     }
                                 }
                             }
@@ -231,12 +150,7 @@
                             "content": {
                                 "application/json": {
                                     "schema": {
-                                        "type": "object",
-                                        "properties": {
-                                            "message": {
-                                                "type": "string"
-                                            }
-                                        }
+                                        "$ref": "#/components/schemas/userRegisterErrorUserExists"
                                     }
                                 }
                             }
@@ -248,24 +162,21 @@
         "/contact": {
             "post": {
                 "summary": "Cria contato",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "email": {
-                                        "type": "string",
-                                        "format": "email"
-                                    },
-                                    "message": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": ["name", "email", "message"]
+                                "$ref": "#/components/schemas/newContact"
                             }
                         }
                     }
@@ -276,12 +187,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/newContactSucess"
                                 }
                             }
                         }
@@ -291,12 +197,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/newContactError"
                                 }
                             }
                         }
@@ -305,6 +206,16 @@
             },
             "get": {
                 "summary": "Lista contatos",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Lista de contatos",
@@ -344,6 +255,24 @@
         },
         "/contact/{id}":{
             "delete": {
+                "parameters":                 [
+                    {
+                        "name": "userid",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "summary": "Deleta contato",
                 "responses": {
                     "200": {
@@ -351,12 +280,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/deleteContactSucess"
                                 }
                             }
                         }
@@ -366,12 +290,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/deleteContactErrorNotFound"
                                 }
                             }
                         }
@@ -381,12 +300,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "$ref": "#/components/schemas/deleteContactErrorCredentials"
                                 }
                             }
                         }
@@ -394,7 +308,188 @@
                 }
             }
         }
-    }
-}
+    },
+    "components": {
+        "schemas": {
+            "userLogin": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "marco@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "12345678"
+                    }
+                }
+            },
+            "userRegister": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "User test"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "test@test.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "12345678"
+                    }
+                }
+            },
+            "newContact": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "User test"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "test@test.com"
+                     },
+                    "phoneNumber": {
+                        "type": "string",
+                        "example": "12345678"
+                    },
+                    "userId": {
+                        "type": "number",
+                        "example": 1
+                    }
+                }
+            },
+            "loginSucess": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Login realizado com sucesso"
+                    }
+                }
+            },
+            "loginErrorCredentials": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Usuário ou senha inválidos"
+                    }
+                }
+            },
+            "loginErrorUserNotFound":{
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Usuário não encontrado"
+                    }
+                }
+            },
+            "userDeleteSucess": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Usuário deletado com sucesso"
+                    }
+                }
+            },
+            "userDeleteErrorNotFound": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Usuário não encontrado"
+                    }
+                }
+            },
+            "userDeleteErrorCredentials": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Credenciais inválidas"
+                    }
+                }
+            },
+            "userRegisterSucess": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Usuário cadastrado com sucesso"
+                    }
+                }
+            },
+            "userRegisterErrorUserExists": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Usuário já existe"
+                    }
+                }
+            },
+            "newContactSucess": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Contato cadastrado com sucesso"
+                    }
+                }
+            },
+            "newContactError": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Dados invalidos"
+                    }
+                }
+            },
+            "deleteContactSucess": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Contato deletado com sucesso"
+                    }
+                }
+            },
+            "deleteContactErrorNotFound": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Contato não encontrado"
+                    }
+                }
+            },
+            "deleteContactErrorCredentials": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Credenciais inválidas"
+                    }
+                }
+            }
+            }
+            }
+            }
+        
+    
+
+    
+
+
 
     
