@@ -27,3 +27,21 @@ $ yarn install
 $ npm start
 
 ```
+
+Entre com um dos dois usuários já criados:
+
+````
+    {
+        email: "marco@gmail.com",
+        password: "12345678"
+    },
+    {
+        
+        email: 'travolta@gmail.com',
+        password: '12345678',
+    },
+    {
+        email: 'johncena@wwe.com',
+        password: '12345678',
+    }
+````
