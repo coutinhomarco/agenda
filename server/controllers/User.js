@@ -30,12 +30,7 @@ const destroy = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const {email, password} = req.body;
-    const user = await User.findOne({
-      where: {
-        email,
-      },
-    });
-    console.log(user);
+    const {user} = req
     if (user.dataValues.password !== password) return res.status(401).json({message: 'Invalid credentials'});
     const userDetails = {
       email, userId:user.dataValues.userId, name: user.dataValues.name
