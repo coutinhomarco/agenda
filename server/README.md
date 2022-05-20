@@ -44,3 +44,6 @@ Senha menor que 8 caracteres
 <img src="./images/passwordleast8.png">
 Senha incorreta
 <img src="./images/invalidcredentials.png">
+Email invalido
+<img src="./images/invalidemail.png">
+
