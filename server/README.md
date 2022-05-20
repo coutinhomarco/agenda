@@ -5,6 +5,7 @@
     <li>Node</li>
     <li>Express</li>
     <li>JsonWebToken</li>
+    <li>Swagger-ui-express</li>
     <li>React Router Dom</li>
     <li>mysql2</li>
     <li>nodemon</li>
