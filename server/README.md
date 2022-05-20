@@ -39,11 +39,14 @@ $ npm run dev
 
 <h2>Login</h2>
 Login realizado com sucesso
-<img src="./images/login.png">
+<img width="70%" src="./images/login.png">
+<br>
 Senha menor que 8 caracteres
-<img src="./images/passwordleast8.png">
+<img width="70%" src="./images/passwordleast8.png">
+<br>
 Senha incorreta
-<img src="./images/invalidcredentials.png">
+<img width="70%" src="./images/invalidcredentials.png">
+<br>
 Email invalido
-<img src="./images/invalidemail.png">
-
+<img width="70%" src="./images/invalidemail.png">
+<br>
