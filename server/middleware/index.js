@@ -1,9 +1,9 @@
-const auth = require('./auth.js');
-const contactValidate = require('./contactValidate.js');
-const errorHandler = require('./errorHandler.js');
-const userValidate = require('./userValidate.js');
+const auth = require('./auth');
+const contactValidate = require('./contactValidate');
+const errorHandler = require('./errorHandler');
+const userValidate = require('./userValidate');
 
-module.exports = { 
+module.exports = {
   auth,
   contactValidate,
   errorHandler,

@@ -6,7 +6,7 @@ const validateName = async (req, res, next) => {
     return res.status(400).json({ message: 'Name is required' });
   }
   next();
-}
+};
 const validateUserData = async (req, res, next) => {
   const regex = /[\w]+@[\w]+.com/i;
   const { email, password } = req.body;
@@ -18,7 +18,7 @@ const validateUserData = async (req, res, next) => {
     return res.status(400).json({ message: 'Password must be at least 8 characters long' });
   }
   next();
-}
+};
 
 const validateCreate = async (req, res, next) => {
   try {
@@ -34,7 +34,7 @@ const validateCreate = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 const validateLogin = async (req, res, next) => {
   try {
@@ -46,11 +46,13 @@ const validateLogin = async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    req.user = user
+    req.user = user;
     next();
   } catch (error) {
     next(error);
   }
-}
+};
 
-module.exports = {validateCreate, validateLogin, validateUserData, validateName};
+module.exports = {
+  validateCreate, validateLogin, validateUserData, validateName,
+};
