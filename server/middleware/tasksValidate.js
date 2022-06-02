@@ -1,5 +1,6 @@
 const validateBodyInfo = (req, res, next) => {
   try {
+    const statusPossibilities = [0, 1, 2];
     const { title, description, status } = req.body;
     if (!title) {
       return res.status(400).json({ message: 'Title is required' });
@@ -7,7 +8,7 @@ const validateBodyInfo = (req, res, next) => {
     if (!description) {
       return res.status(400).json({ message: 'Description is required' });
     }
-    if (!status) {
+    if (!statusPossibilities.some((num) => num === status) || typeof status !== 'number') {
       return res.status(400).json({ message: 'Status is required' });
     }
     next();
@@ -28,4 +29,4 @@ const validateParams = (req, res, next) => {
   }
 };
 
-export default { validateBodyInfo, validateParams };
+module.exports = { validateBodyInfo, validateParams };

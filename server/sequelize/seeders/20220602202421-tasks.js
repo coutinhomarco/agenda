@@ -1,22 +1,17 @@
-'use strict';
-
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface) {
     await queryInterface.bulkInsert('Tasks', [
       {
         contactId: 1,
         userId: 1,
         title: 'Buy milk',
         description: 'Buy milk for the family',
-        status: 'pending',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      }
+        status: 0,
+      },
     ]);
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.bulkDelete('Tasks', null, {});
-
-  }
+  },
 };

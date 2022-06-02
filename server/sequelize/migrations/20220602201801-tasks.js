@@ -1,11 +1,13 @@
-'use strict';
-
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Tasks', {
-      contactId: {
+      taskId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
+      },
+      contactId: {
+        type: Sequelize.INTEGER,
         references: {
           model: 'Contact',
           key: 'contactId',
@@ -15,7 +17,6 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         references: {
           model: 'User',
           key: 'userId',
@@ -33,21 +34,13 @@ module.exports = {
         allowNull: false,
       },
       status: {
-        type: Sequelize.ENUM('pending', 'in-progress', 'done'),
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.dropTable('Tasks');
-  }
+  },
 };

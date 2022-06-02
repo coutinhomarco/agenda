@@ -1,7 +1,9 @@
-const contact = require('./contact.js');
-const user = require('./user.js');
+const contact = require('./contact');
+const user = require('./user');
+const tasks = require('./tasks');
 
-module.exports = { 
+module.exports = {
   contact,
   user,
+  tasks,
 };

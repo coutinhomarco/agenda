@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement:true,
+      autoIncrement: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     timestamps: false,
-    tableName: 'User'
+    tableName: 'User',
   });
 
   User.associate = (models) => {
@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       models.Contact,
       { foreignKey: 'userId', as: 'user' },
     );
+    User.hasMany(models.Tasks, { foreignKey: 'userId', as: 'tasks' });
   };
 
   return User;

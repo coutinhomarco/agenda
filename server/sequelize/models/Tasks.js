@@ -1,57 +1,58 @@
 module.exports = (sequelize, DataTypes) => {
-    const Task = sequelize.define('Tasks', {
-        contactId: {
+  const Task = sequelize.define(
+    'Tasks',
+    {
+      taskId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
+      },
+      contactId: {
+        type: DataTypes.INTEGER,
         references: {
-            model: 'Contact',
-            key: 'contactId',
+          model: 'Contact',
+          key: 'contactId',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        },
-        userId: {
+      },
+      userId: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
         references: {
-            model: 'User',
-            key: 'userId',
+          model: 'User',
+          key: 'userId',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        },
-        title: {
+      },
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
-        },
-        description: {
+      },
+      description: {
         type: DataTypes.STRING,
         allowNull: false,
-        },
-        status: {
-        type: DataTypes.ENUM('pending', 'in-progress', 'done'),
-        allowNull: false,
-        },
-        createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-        },
-        updatedAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-        },
-    });
-    
-    Task.associate = (models) => {
-        Task.belongsTo(
-        models.Contact,
-        { foreignKey: 'contactId', as: 'contact' },
-        );
-        Task.belongsTo(
-        models.User,
-        { foreignKey: 'userId', as: 'user' },
-        );
-    };
-    
-    return Task;
-}
+      },
+      status: {
+        type: DataTypes.INTEGER,
+      },
+    },
+    {
+      timestamps: false,
+      tableName: 'Tasks',
+    },
+  );
+
+  Task.associate = (models) => {
+    Task.belongsTo(
+      models.Contact,
+      { foreignKey: 'contactId', as: 'contact' },
+    );
+    Task.belongsTo(
+      models.User,
+      { foreignKey: 'userId', as: 'user' },
+    );
+  };
+
+  return Task;
+};
