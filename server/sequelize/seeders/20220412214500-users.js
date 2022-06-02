@@ -1,6 +1,6 @@
-
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.bulkInsert('User', 
+  up: (queryInterface) => queryInterface.bulkInsert(
+    'User',
     [
       {
         name: 'Marco Coutinho',
@@ -16,8 +16,11 @@ module.exports = {
         name: 'John Cena',
         email: 'johncena@wwe.com',
         password: '12345678',
-      }
-    ], {}),
+      },
+    ],
+
+    {},
+  ),
 
   down: (queryInterface) => queryInterface.bulkDelete('Users', null, {}),
 };
