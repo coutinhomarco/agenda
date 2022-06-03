@@ -13,9 +13,20 @@ const create = async (req, res, next) => {
   }
 };
 
-// const update (req, res, next) => {
-//     //IMPLEMENTA
-// }
+const update = async (req, res, next) => {
+  try {
+    const { contactId, userId } = req.ids;
+    const { title, description, status } = req.body;
+    const task = await Tasks.findOne({ where: { contactId, userId } });
+    if (!task) return res.status(404).json({ message: 'Task not found' });
+    await Tasks.update({
+      title, description, status,
+    }, { where: { contactId, userId } });
+    return res.status(200).json({ message: 'Task updated' });
+  } catch (error) {
+    next(error);
+  }
+};
 
 const findOne = async (req, res, next) => {
   try {
@@ -39,4 +50,6 @@ const destroy = async (req, res, next) => {
     next(error);
   }
 };
-module.exports = { create, findOne, destroy };
+module.exports = {
+  create, findOne, destroy, update,
+};
