@@ -23,6 +23,8 @@ const validateParams = (req, res, next) => {
     if (!contactId) {
       return res.status(400).json({ message: 'ContactId is required' });
     }
+    req.ids = { contactId: Number(contactId), userId: req.tokenData.userId };
+    req.info = { ...req.body, ...req.ids };
     next();
   } catch (error) {
     next(error);

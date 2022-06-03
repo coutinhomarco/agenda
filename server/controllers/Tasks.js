@@ -2,16 +2,8 @@ const { Tasks } = require('../sequelize/models');
 
 const create = async (req, res, next) => {
   try {
-    const { userId } = req.tokenData;
-    const { title, description, status } = req.body;
-    const { contactId } = req.params;
-    const info = {
-      title,
-      description,
-      status,
-      contactId: Number(contactId),
-      userId,
-    };
+    const { contactId, userId } = req.ids;
+    const { info } = req;
     let task = await Tasks.findOne({ where: { contactId, userId } });
     if (task) return res.status(409).json({ message: 'Task with this contact already exists' });
     task = await Tasks.create({ ...info });
@@ -27,8 +19,7 @@ const create = async (req, res, next) => {
 
 const findOne = async (req, res, next) => {
   try {
-    const { contactId } = req.params;
-    const { userId } = req.tokenData;
+    const { contactId, userId } = req.ids;
     const task = await Tasks.findOne({ where: { contactId, userId } });
     if (!task) return res.status(404).json({ message: 'Task not found' });
     return res.status(200).json(task);
@@ -39,8 +30,7 @@ const findOne = async (req, res, next) => {
 
 const destroy = async (req, res, next) => {
   try {
-    const { contactId } = req.params;
-    const { userId } = req.tokenData;
+    const { contactId, userId } = req.ids;
     const task = await Tasks.findOne({ where: { contactId, userId } });
     if (!task) return res.status(404).json({ message: 'Task not found' });
     await Tasks.destroy();
