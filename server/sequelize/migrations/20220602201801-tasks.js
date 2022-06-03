@@ -7,6 +7,7 @@ module.exports = {
         autoIncrement: true,
       },
       contactId: {
+        unique: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'Contact',

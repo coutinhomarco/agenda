@@ -37,10 +37,6 @@ module.exports = (sequelize, DataTypes) => {
       models.User,
       { foreignKey: 'userId', as: 'user' },
     );
-    Contact.hasOne(
-      models.Tasks,
-      { foreignKey: 'contactId', as: 'task' },
-    );
   };
 
   return Contact;
