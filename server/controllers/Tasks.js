@@ -50,6 +50,17 @@ const destroy = async (req, res, next) => {
     next(error);
   }
 };
+
+const findAll = async (req, res, next) => {
+  try {
+    const { userId } = req.tokenData;
+    const tasks = await Tasks.findAll({ where: { userId } });
+    return res.status(200).json(tasks);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
-  create, findOne, destroy, update,
+  create, findOne, destroy, update, findAll,
 };
