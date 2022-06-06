@@ -28,6 +28,7 @@ export default function Agenda() {
       toast.error(error.message, toastOption);
     }
   }, []);
+
   const handleContactClick = async () => {
     setNewContact(!newContact);
   };
@@ -43,6 +44,7 @@ export default function Agenda() {
       toast.error(error.message, toastOption);
     }
   };
+
   return (
     <>
       <header className="agenda-header">
@@ -52,7 +54,6 @@ export default function Agenda() {
         </h1>
         <button className="btn btn-primary" onClick={handleContactClick} type="button">New contact</button>
         <button className="btn btn-danger" onClick={handleLogout} type="button">Log out</button>
-
       </header>
       <main>
         <div className="agenda-main">

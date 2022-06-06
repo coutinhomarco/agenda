@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Contacts from './pages/Contacts';
 import './App.css';
 import Provider from './context/Provider';
+import Tasks from './pages/Tasks';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Provider>
         <Switch>
           <Route exact path="/"><Login /></Route>
+          <Route exact path="/tasks"><Tasks /></Route>
           <Route exact path="/register"><Register /></Route>
           <Route path="/contacts"><Contacts /></Route>
         </Switch>
