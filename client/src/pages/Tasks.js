@@ -1,12 +1,6 @@
 import React, { useEffect, useContext } from 'react';
-import DatePicker, { registerLocale } from 'react-datepicker';
-import ptBR from 'date-fns/locale/pt-BR';
 import Calendar from '../components/Calendar';
 import Context from '../context/Context';
-
-import 'react-datepicker/dist/react-datepicker.css';
-
-registerLocale('pt-BR', ptBR);
 
 export default function Tasks() {
   const {
@@ -29,19 +23,10 @@ export default function Tasks() {
           {userDetails.name}
           &apos;s tasks
         </h1>
+        <button className="btn btn-primary" type="button">Contacts</button>
         <button className="btn btn-danger" type="button">Log out</button>
+
       </header>
-      <DatePicker
-        className="w-full"
-        // selected={displayDate || new Date()}
-        // onChange={(date) => handleChange(date)}
-        showTimeSelect
-        locale="pt-BR"
-        timeIntervals={15}
-        dateFormat="Pp"
-        placeholderText="Selecione uma data..."
-        required
-      />
       <Calendar />
     </div>
   );
