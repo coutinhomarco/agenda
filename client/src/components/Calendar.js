@@ -76,7 +76,6 @@ export default function Calendar() {
         setContacts(JSON.parse(localStorageContacts));
       }
       if (!tasksList.length > 0) {
-        console.log('fetching tasks');
         await setTasksList([...await fetchTasks()]);
       }
     },
