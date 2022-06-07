@@ -34,7 +34,6 @@ export default function Calendar() {
       }) => ({
         id: taskId, title, start, contactId,
       }));
-    await setTasksList([...taskArray]);
     localStorage.setItem('tasks', JSON.stringify(tasksList));
     return taskArray;
   };
@@ -70,17 +69,19 @@ export default function Calendar() {
     }
   };
 
-  useEffect(async () => {
-    if (!contacts.lenght > 0) {
-      const localStorageContacts = localStorage.getItem('contacts');
-      setContacts(JSON.parse(localStorageContacts));
-    }
-    const areThereTasks = await fetchTasks();
-    if (!areThereTasks) {
-      const localStorageTasks = localStorage.getItem('tasks');
-      setTasksList(JSON.parse(localStorageTasks));
-    }
-  }, []);
+  useEffect(
+    async () => {
+      if (!contacts.lenght > 0) {
+        const localStorageContacts = localStorage.getItem('contacts');
+        setContacts(JSON.parse(localStorageContacts));
+      }
+      if (!tasksList.length > 0) {
+        console.log('fetching tasks');
+        await setTasksList([...await fetchTasks()]);
+      }
+    },
+    [tasksList],
+  );
 
   return (
     <div className="calendar-container">
@@ -137,7 +138,7 @@ export default function Calendar() {
             center: 'title',
             left: 'dayGridMonth,timeGridWeek,timeGridDay',
           }}
-          height="70vh"
+          height="75vh"
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           events={tasksList}
           dateClick={({ date }) => setTaskDate(date)}
