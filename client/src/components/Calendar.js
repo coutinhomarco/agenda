@@ -28,9 +28,11 @@ export default function Calendar() {
       headers: { Authorization: `Bearer ${localStorageToken}`, 'Content-Type': 'application/json' },
     };
     const response = await fetch('http://localhost:3001/tasks', fetchMethod).then((res) => res.json());
-    setTasksList(response);
-    localStorage.setItem('tasks', JSON.stringify(response));
-    return response;
+    const taskArray = response
+      .map((task) => ({ id: task.taskId, title: task.taskName, start: task.taskDate }));
+    await setTasksList([...tasksList, ...taskArray]);
+    localStorage.setItem('tasks', JSON.stringify(tasksList));
+    return taskArray;
   };
 
   const onTaskInputChange = (e) => {
