@@ -34,7 +34,8 @@ export default function NewContact() {
         .then((response) => response.json())
         .then((json) => json);
       toast.success(fetchData.message, toastOption);
-      setContacts([...contacts, fetchData.data]);
+      await setContacts([...contacts, fetchData.data]);
+      localStorage.setItem('contacts', JSON.stringify(contacts));
     } catch (error) {
       toast.fail(error.message, toastOption);
     }

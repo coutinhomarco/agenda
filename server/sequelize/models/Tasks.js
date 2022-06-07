@@ -36,10 +36,23 @@ module.exports = (sequelize, DataTypes) => {
       },
       status: {
         type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      taskDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
       },
     },
     {
-      timestamps: false,
+      timestamps: true,
       tableName: 'Tasks',
     },
   );

@@ -7,6 +7,10 @@ module.exports = {
         title: 'Buy milk',
         description: 'Buy milk for the family',
         status: 0,
+        createdAt: new Date(),
+        taskDate: new Date(),
+        updatedAt: new Date(),
+
       },
     ]);
   },

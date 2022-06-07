@@ -7,6 +7,9 @@ export default function Provider({ children }) {
   const [token, setToken] = useState();
   const [contacts, setContacts] = useState([]);
   const [userDetails, setUserDetails] = useState({});
+  const [taskDate, setTaskDate] = useState(new Date());
+  const [inputDetails, setInputDetails] = useState({});
+  const [tasksList, setTasksList] = useState([]);
 
   const CONTEXT_VALUE = {
     token,
@@ -15,6 +18,12 @@ export default function Provider({ children }) {
     setContacts,
     userDetails,
     setUserDetails,
+    taskDate,
+    setTaskDate,
+    inputDetails,
+    setInputDetails,
+    tasksList,
+    setTasksList,
   };
 
   return (

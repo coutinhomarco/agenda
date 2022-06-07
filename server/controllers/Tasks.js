@@ -7,7 +7,7 @@ const create = async (req, res, next) => {
     let task = await Tasks.findOne({ where: { contactId, userId } });
     if (task) return res.status(409).json({ message: 'Task with this contact already exists' });
     task = await Tasks.create({ ...info });
-    return res.status(201).json({ message: 'Task created', data: task });
+    return res.status(201).json({ message: 'Task created', data: [task] });
   } catch (error) {
     next(error);
   }

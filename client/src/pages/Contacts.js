@@ -23,9 +23,8 @@ export default function Agenda() {
         const localUserDetails = localStorage.getItem('userDetails');
         setUserDetails(JSON.parse(localUserDetails));
       }
-      const contactsFromAPI = jsonData.sort((a, b) => (a.name > b.name ? 1 : -1));
-      setContacts(contactsFromAPI);
-      localStorage.setItem('contacts', JSON.stringify(contactsFromAPI));
+      setContacts(jsonData.sort((a, b) => a.contactId - b.contactId));
+      localStorage.setItem('contacts', JSON.stringify(jsonData.sort((a, b) => a.contactId - b.contactId)));
     } catch (error) {
       toast.error(error.message, toastOption);
     }
@@ -74,17 +73,18 @@ export default function Agenda() {
           </section>
           )}
           <aside className="center">
-            {contacts.map(({
-              name, email, phoneNumber, contactId,
-            }) => (
-              <Contact
-                key={contactId}
-                name={name}
-                email={email}
-                phoneNumber={phoneNumber}
-                contactId={contactId}
-              />
-            ))}
+            {contacts.sort((a, b) => (a.name > b.name ? 1 : -1))
+              .map(({
+                name, email, phoneNumber, contactId,
+              }) => (
+                <Contact
+                  key={contactId}
+                  name={name}
+                  email={email}
+                  phoneNumber={phoneNumber}
+                  contactId={contactId}
+                />
+              ))}
           </aside>
         </div>
       </main>
