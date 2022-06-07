@@ -9,7 +9,6 @@ export default function Provider({ children }) {
   const [userDetails, setUserDetails] = useState({});
 
   const CONTEXT_VALUE = {
-
     token,
     setToken,
     contacts,

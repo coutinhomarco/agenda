@@ -141,6 +141,15 @@ main{
   width: 80vw;
 }
 
+.calendar-form{
+  color: whitesmoke;
+}
+
+.datepicker{
+  width: 89.5%;
+  padding: 5px 15px;
+}
+
 /* .register-page{
   background-color: #1c1c1e;
   height: 50vh;

@@ -23,21 +23,30 @@ export default function Agenda() {
         const localUserDetails = localStorage.getItem('userDetails');
         setUserDetails(JSON.parse(localUserDetails));
       }
-      setContacts(jsonData.sort((a, b) => (a.name > b.name ? 1 : -1)));
+      const contactsFromAPI = jsonData.sort((a, b) => (a.name > b.name ? 1 : -1));
+      setContacts(contactsFromAPI);
+      localStorage.setItem('contacts', JSON.stringify(contactsFromAPI));
     } catch (error) {
       toast.error(error.message, toastOption);
     }
   }, []);
 
-  const handleContactClick = async () => {
+  const handleContactClick = () => {
     setNewContact(!newContact);
+  };
+
+  const handleTasksClick = () => {
+    history.push('/tasks');
   };
 
   const handleLogout = async () => {
     try {
       setToken(undefined);
+      setUserDetails({});
+      setContacts([]);
       localStorage.removeItem('token');
       localStorage.removeItem('userDetails');
+      localStorage.removeItem('contacts');
       toast.success('Logout Successful', toastOption);
       history.push('/');
     } catch (error) {
@@ -53,6 +62,8 @@ export default function Agenda() {
           &apos;s contacts
         </h1>
         <button className="btn btn-primary" onClick={handleContactClick} type="button">New contact</button>
+        <button className="btn btn-secondary" onClick={handleTasksClick} type="button">Tasks</button>
+
         <button className="btn btn-danger" onClick={handleLogout} type="button">Log out</button>
       </header>
       <main>

@@ -39,7 +39,7 @@ export default function Login() {
       setToken(fetchData.token);
       toast.success(fetchData.message, toastOption);
       setUserDetails(fetchData.userDetails);
-      localStorage.setItem('token', fetchData.token);
+      localStorage.setItem('token', JSON.stringify(fetchData.token));
       localStorage.setItem('userDetails', JSON.stringify(fetchData.userDetails));
       history.push('/contacts');
     } catch (error) {
