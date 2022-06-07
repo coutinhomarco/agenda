@@ -29,8 +29,12 @@ export default function Calendar() {
     };
     const response = await fetch('http://localhost:3001/tasks', fetchMethod).then((res) => res.json());
     const taskArray = response
-      .map((task) => ({ id: task.taskId, title: task.title, start: task.taskDate }));
-    await setTasksList([...tasksList, ...taskArray]);
+      .map(({
+        taskId, title, taskDate: start, contactId,
+      }) => ({
+        id: taskId, title, start, contactId,
+      }));
+    await setTasksList([...taskArray]);
     localStorage.setItem('tasks', JSON.stringify(tasksList));
     return taskArray;
   };
@@ -57,6 +61,8 @@ export default function Calendar() {
         .then((response) => response.json())
         .then((json) => json);
       setTasksList([...tasksList, fetchData.data]);
+      const newContactsOptions = contacts.map((c) => c.contactId === contact);
+      setContacts(newContactsOptions);
       localStorage.setItem('tasks', JSON.stringify(tasksList));
       toast.success(fetchData.message, toastOption);
     } catch (error) {
@@ -98,8 +104,12 @@ export default function Calendar() {
               <option value="" disabled>Select your option</option>
 
               {contacts && (contacts
-                .map(({ contactId, name }) => (
-                  <option key={contactId} value={contactId}>{name}</option>)))}
+                .map(({ contactId, name }) => {
+                  if (tasksList.some((task) => task.contactId === contactId)) {
+                    return null;
+                  }
+                  return <option key={contactId} value={contactId}>{name}</option>;
+                }))}
 
             </select>
           </label>
