@@ -29,7 +29,7 @@ export default function Calendar() {
     };
     const response = await fetch('http://localhost:3001/tasks', fetchMethod).then((res) => res.json());
     const taskArray = response
-      .map((task) => ({ id: task.taskId, title: task.taskName, start: task.taskDate }));
+      .map((task) => ({ id: task.taskId, title: task.title, start: task.taskDate }));
     await setTasksList([...tasksList, ...taskArray]);
     localStorage.setItem('tasks', JSON.stringify(tasksList));
     return taskArray;
@@ -40,24 +40,28 @@ export default function Calendar() {
   };
 
   const onSubmit = async (e) => {
-    const {
-      contact, title, description, status,
-    } = inputDetails;
-    e.preventDefault();
-    const body = {
-      contact, title, description, status, taskDate: taskDate.toISOString(),
-    };
-    const fetchMethod = {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    };
-    const fetchData = await fetch(`http://localhost:3001/tasks/${contact}`, fetchMethod)
-      .then((response) => response.json())
-      .then((json) => json);
-    setTasksList([...tasksList, fetchData.data]);
-    localStorage.setItem('tasks', JSON.stringify(tasksList));
-    toast.success(fetchData.message, toastOption);
+    try {
+      const {
+        contact, title, description, status,
+      } = inputDetails;
+      e.preventDefault();
+      const body = {
+        contact, title, description, status, taskDate: taskDate.toISOString(),
+      };
+      const fetchMethod = {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      };
+      const fetchData = await fetch(`http://localhost:3001/tasks/${contact}`, fetchMethod)
+        .then((response) => response.json())
+        .then((json) => json);
+      setTasksList([...tasksList, fetchData.data]);
+      localStorage.setItem('tasks', JSON.stringify(tasksList));
+      toast.success(fetchData.message, toastOption);
+    } catch (error) {
+      toast.error(error.message, toastOption);
+    }
   };
 
   useEffect(async () => {
@@ -90,8 +94,8 @@ export default function Calendar() {
         <form onSubmit={onSubmit} onChange={onTaskInputChange} className="login-form input-group calendar-form">
           <label className="form-label" htmlFor="contacts">
             Select a contact
-            <select name="contact" className="form-select" id="contacts">
-              <option value="" disabled selected>Select your option</option>
+            <select defaultValue="" name="contact" className="form-select" id="contacts">
+              <option value="" disabled>Select your option</option>
 
               {contacts && (contacts
                 .map(({ contactId, name }) => (
