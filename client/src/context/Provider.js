@@ -10,7 +10,6 @@ export default function Provider({ children }) {
 
   const [taskDate, setTaskDate] = useState(new Date());
   const [inputDetails, setInputDetails] = useState({});
-  const [tasksList, setTasksList] = useState([]);
 
   const CONTEXT_VALUE = {
     token,
@@ -23,8 +22,6 @@ export default function Provider({ children }) {
     setTaskDate,
     inputDetails,
     setInputDetails,
-    tasksList,
-    setTasksList,
 
   };
 

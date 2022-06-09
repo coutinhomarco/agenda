@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -7,7 +7,6 @@ import ptBrLocale from '@fullcalendar/core/locales/pt-br';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { toast } from 'react-toastify';
 import ptBR from 'date-fns/locale/pt-BR';
-import { useHistory } from 'react-router-dom';
 import toastOption from '../toastifyOptions';
 import 'react-datepicker/dist/react-datepicker.css';
 import Context from '../context/Context';
@@ -15,11 +14,14 @@ import Context from '../context/Context';
 registerLocale('pt-BR', ptBR);
 
 export default function Calendar() {
-  const history = useHistory();
+  const [tasksList, setTasksList] = useState([]);
+
   const {
-    token, setToken, contacts,
+    token,
+    setToken,
+    contacts,
     setContacts, taskDate, setTaskDate, inputDetails, setInputDetails,
-    tasksList, setTasksList,
+
   } = useContext(Context);
 
   const fetchTasks = async () => {
@@ -37,8 +39,6 @@ export default function Calendar() {
         id: taskId, title, start, contactId,
       }));
     setTasksList(taskArray);
-    localStorage.setItem('tasks', JSON.stringify(tasksList));
-    return taskArray;
   };
 
   const onTaskInputChange = (e) => {
@@ -62,9 +62,13 @@ export default function Calendar() {
       const fetchData = await fetch(`http://localhost:3001/tasks/${contact}`, fetchMethod)
         .then((response) => response.json())
         .then((json) => json);
-      setTasksList([...tasksList, { title, id: fetchData.data.id, contactId: contact }]);
-      localStorage.setItem('tasks', JSON.stringify(tasksList));
-      history.go(0);
+      console.log(fetchData.data);
+      setTasksList([...tasksList, {
+        title,
+        id: Number(fetchData.data.taskId),
+        contactId: Number(contact),
+        start: taskDate.toISOString(),
+      }]);
       toast.success(fetchData.message, toastOption);
     } catch (error) {
       toast.error(error.message, toastOption);
@@ -77,11 +81,9 @@ export default function Calendar() {
         const localStorageContacts = localStorage.getItem('contacts');
         setContacts(JSON.parse(localStorageContacts));
       }
-      if (!tasksList.length > 0) {
-        await fetchTasks();
-      }
+      await fetchTasks();
     },
-    [tasksList],
+    [],
   );
 
   return (
