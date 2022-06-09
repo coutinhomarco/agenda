@@ -21,7 +21,6 @@ export default function Calendar() {
     setToken,
     contacts,
     setContacts, taskDate, setTaskDate, inputDetails, setInputDetails,
-
   } = useContext(Context);
 
   const fetchTasks = async () => {
@@ -62,7 +61,7 @@ export default function Calendar() {
       const fetchData = await fetch(`http://localhost:3001/tasks/${contact}`, fetchMethod)
         .then((response) => response.json())
         .then((json) => json);
-      console.log(fetchData.data);
+
       setTasksList([...tasksList, {
         title,
         id: Number(fetchData.data.taskId),
@@ -77,10 +76,9 @@ export default function Calendar() {
 
   useEffect(
     async () => {
-      if (!contacts.lenght > 0) {
-        const localStorageContacts = localStorage.getItem('contacts');
-        setContacts(JSON.parse(localStorageContacts));
-      }
+      const localStorageContacts = localStorage.getItem('contacts');
+      setContacts(JSON.parse(localStorageContacts));
+
       await fetchTasks();
     },
     [],
