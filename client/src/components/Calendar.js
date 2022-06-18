@@ -39,9 +39,9 @@ export default function Calendar() {
     const response = await fetch('http://localhost:3001/tasks', fetchMethod).then((res) => res.json());
     const taskArray = response
       .map(({
-        taskId, title, taskDate: start, contactId,
+        taskId, title, taskStartDate: start, taskEndDate: end, contactId,
       }) => ({
-        id: taskId, title, start, contactId,
+        id: taskId, title, start, contactId, end,
       }));
     setTasksList(taskArray);
   };
@@ -57,7 +57,12 @@ export default function Calendar() {
       } = inputDetails;
       e.preventDefault();
       const body = {
-        contact, title, description, status, taskDate: taskDate.toISOString(),
+        contact,
+        title,
+        description,
+        status: Number(status),
+        taskStartDate: taskStartDate.toISOString(),
+        taskEndDate: taskEndDate.toISOString(),
       };
       const fetchMethod = {
         method: 'POST',
@@ -72,7 +77,8 @@ export default function Calendar() {
         title,
         id: Number(fetchData.data.taskId),
         contactId: Number(contact),
-        start: taskDate.toISOString(),
+        start: taskStartDate.toISOString(),
+        // end: taskEndDate.toISOString(),
       }]);
       toast.success(fetchData.message, toastOption);
     } catch (error) {
@@ -94,30 +100,32 @@ export default function Calendar() {
     <div className="calendar-container">
 
       <section className="date-input">
-        <DatePicker
-          className="datepicker"
-          selected={taskStartDate}
-          onChange={(date) => setTaskStartDate(date)}
-          showTimeSelect
-          locale="pt-BR"
-          timeIntervals={15}
-          dateFormat="Pp"
-          placeholderText="Select a START date..."
-          required
-        />
-        <DatePicker
-          className="datepicker"
-          selected={taskEndDate}
-          onChange={(date) => setTaskEndDate(date)}
-          showTimeSelect
-          locale="pt-BR"
-          timeIntervals={15}
-          dateFormat="Pp"
-          placeholderText="Select a END date..."
-          required
-        />
+        <div className="dateselector-container">
+          <DatePicker
+            className="datepicker"
+            selected={taskStartDate}
+            onChange={(date) => setTaskStartDate(date)}
+            showTimeSelect
+            locale="pt-BR"
+            timeIntervals={15}
+            dateFormat="Pp"
+            placeholderText="Start"
+            required
+          />
+          <DatePicker
+            className="datepicker"
+            selected={taskEndDate}
+            onChange={(date) => setTaskEndDate(date)}
+            showTimeSelect
+            locale="pt-BR"
+            timeIntervals={15}
+            dateFormat="Pp"
+            placeholderText="End"
+            required
+          />
+        </div>
 
-        <form onSubmit={onSubmit} onChange={onTaskInputChange} className="login-form input-group calendar-form">
+        <form onSubmit={onSubmit} onChange={onTaskInputChange} className="tasks-form input-group calendar-form">
           <label className="form-label" htmlFor="contacts">
             Select a contact
             <select defaultValue="" name="contact" className="form-select" id="contacts">
@@ -142,8 +150,13 @@ export default function Calendar() {
             <input name="description" className="form-control" id="description" type="text" />
           </label>
           <label className="form-label" htmlFor="status">
-            Status (0 - todo, 1 - in progress, 2 - done)
-            <input name="status" className="form-control" id="status" type="number" />
+            Status
+            <select defaultValue="" name="status" className="form-control" id="status" type="number">
+              <option value="" disabled>Select your option</option>
+              <option value="0">To do</option>
+              <option value="1">In progress</option>
+              <option value="2">Done</option>
+            </select>
           </label>
           <button className="btn btn-primary" type="submit">Submit</button>
         </form>
