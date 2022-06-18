@@ -46,7 +46,11 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      taskDate: {
+      taskStartDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      taskEndDate: {
         type: Sequelize.DATE,
         allowNull: false,
       },

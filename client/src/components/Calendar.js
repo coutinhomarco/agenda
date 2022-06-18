@@ -20,7 +20,13 @@ export default function Calendar() {
     token,
     setToken,
     contacts,
-    setContacts, taskDate, setTaskDate, inputDetails, setInputDetails,
+    setContacts, inputDetails, setInputDetails,
+    taskEndDate,
+
+    setTaskEndDate,
+
+    taskStartDate,
+    setTaskStartDate,
   } = useContext(Context);
 
   const fetchTasks = async () => {
@@ -86,16 +92,28 @@ export default function Calendar() {
 
   return (
     <div className="calendar-container">
+
       <section className="date-input">
         <DatePicker
           className="datepicker"
-          selected={taskDate || new Date()}
-          onChange={(date) => setTaskDate(date)}
+          selected={taskStartDate}
+          onChange={(date) => setTaskStartDate(date)}
           showTimeSelect
           locale="pt-BR"
           timeIntervals={15}
           dateFormat="Pp"
-          placeholderText="Select a date..."
+          placeholderText="Select a START date..."
+          required
+        />
+        <DatePicker
+          className="datepicker"
+          selected={taskEndDate}
+          onChange={(date) => setTaskEndDate(date)}
+          showTimeSelect
+          locale="pt-BR"
+          timeIntervals={15}
+          dateFormat="Pp"
+          placeholderText="Select a END date..."
           required
         />
 
@@ -139,10 +157,9 @@ export default function Calendar() {
             center: 'title',
             left: 'dayGridMonth,timeGridWeek,timeGridDay',
           }}
-          height="75vh"
+          height="78vh"
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           events={tasksList}
-          dateClick={({ date }) => setTaskDate(date)}
         />
       </section>
     </div>

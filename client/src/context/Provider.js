@@ -8,7 +8,9 @@ export default function Provider({ children }) {
   const [contacts, setContacts] = useState([]);
   const [userDetails, setUserDetails] = useState({});
 
-  const [taskDate, setTaskDate] = useState(new Date());
+  const [taskStartDate, setTaskStartDate] = useState('');
+  const [taskEndDate, setTaskEndDate] = useState('');
+
   const [inputDetails, setInputDetails] = useState({});
 
   const CONTEXT_VALUE = {
@@ -18,9 +20,11 @@ export default function Provider({ children }) {
     setContacts,
     userDetails,
     setUserDetails,
-    taskDate,
-    setTaskDate,
+    taskEndDate,
+    setTaskEndDate,
     inputDetails,
+    taskStartDate,
+    setTaskStartDate,
     setInputDetails,
 
   };
