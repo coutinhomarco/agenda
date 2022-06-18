@@ -8,7 +8,8 @@ module.exports = {
         description: 'Buy milk for the family',
         status: 0,
         createdAt: new Date(),
-        taskDate: new Date(),
+        taskStartDate: new Date(),
+        taskEndDate: new Date(),
         updatedAt: new Date(),
 
       },
