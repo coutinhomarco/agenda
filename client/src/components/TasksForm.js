@@ -74,7 +74,7 @@ export default function TasksForm() {
       </label>
       <label className="form-label" htmlFor="status">
         Status
-        <select defaultValue="" name="status" className="form-control" id="status" type="number">
+        <select defaultValue="" name="status" className="form-select" id="status" type="number">
           <option value="" disabled>Select your option</option>
           <option value="0">To do</option>
           <option value="1">In progress</option>

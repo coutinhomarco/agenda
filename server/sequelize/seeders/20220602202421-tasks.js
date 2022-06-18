@@ -7,12 +7,8 @@ module.exports = {
         title: 'Buy milk',
         description: 'Buy milk for the family',
         status: 0,
-        createdAt: new Date().toLocaleString('pt-br'),
-        taskStartDate: new Date().toLocaleString('pt-br'),
-
-        taskEndDate: new Date().toLocaleString('pt-br'),
-        updatedAt: new Date().toLocaleString('pt-br'),
-
+        taskStartDate: new Date(),
+        taskEndDate: new Date(),
       },
     ]);
   },
