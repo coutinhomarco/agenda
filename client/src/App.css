@@ -67,7 +67,7 @@ main{
 
 .tasks-form {
   flex-direction: column;
-  padding: 15px;
+  padding: 0 15px;
 }
 
 .tasks-container {
@@ -99,7 +99,7 @@ main{
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  height: 20vh;
+  height: 90px;
   /* margin-bottom: 2.5vh; */
   width: 100vw;
 }
@@ -115,6 +115,33 @@ main{
   text-align: center;
 }
 
+.selected-task{
+  background-color: #27272a;
+  border-radius: 2px;
+  color: white;
+  display: flex;
+  font-weight: 500;
+  font-size: 0.9rem;
+  flex-direction: column;
+  text-align: left;
+  margin-top: 15px;
+  padding: 10px 5px;
+}
+.selected-task > div{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.selected-task p{
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+.date-input input, select, button {
+  max-height: 34px;
+}
+
 .react-datepicker{
   margin-right: 200px;
   z-index: 9999999;
@@ -128,7 +155,11 @@ main{
 .react-datepicker-wrapper{
   align-items: center;
   justify-content: center;
-  margin: 5px 0 ;
+  margin-bottom: 0.5rem;
+}
+
+.tasks-inner-container{
+  height: fit-content;
 }
 
 .dateselector-container{
@@ -148,13 +179,15 @@ main{
 
 .date-input{
   align-self: flex-start;
+  color: white;
+  height: 80vh !important;
   justify-self: center;
   width: 20%;
-  /* margin-right: 70px; */
-  
-  /* justify-self: flex-start; */
 }
 
+.date-input span {
+  align-self: flex-end;
+}
 
 
 .calendar-container{
@@ -273,4 +306,8 @@ main{
 .center{
   justify-self: center;
   align-self: center;
+}
+
+.form-label{
+  margin-bottom: 0.3rem !important;
 }
