@@ -22,7 +22,9 @@ const update = async (req, res, next) => {
     await Tasks.update({
       title, description, status,
     }, { where: { contactId, userId } });
-    return res.status(200).json({ message: 'Task updated' });
+    const taskUpdated = await Tasks.findOne({ where: { contactId, userId } });
+
+    return res.status(200).json({ message: 'Task updated', data: taskUpdated });
   } catch (error) {
     next(error);
   }

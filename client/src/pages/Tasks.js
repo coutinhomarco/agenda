@@ -10,7 +10,6 @@ export default function Tasks() {
     userDetails, setUserDetails, setToken, setContacts,
   } = useContext(Context);
   const history = useHistory();
-  //   const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {
     if (!userDetails.name) {

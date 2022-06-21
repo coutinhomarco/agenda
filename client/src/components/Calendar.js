@@ -35,15 +35,13 @@ export default function Calendar() {
     const id = Number(event.id);
     const task = tasksList.find((obj) => obj.id === id);
     setSelectedTask(task);
-    console.log(task);
   };
 
   useEffect(
     async () => {
       const localStorageContacts = localStorage.getItem('contacts');
       setContacts(JSON.parse(localStorageContacts));
-
-      await fetchTasks();
+      return fetchTasks();
     },
     [],
   );

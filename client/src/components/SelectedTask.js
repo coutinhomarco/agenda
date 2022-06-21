@@ -12,30 +12,22 @@ export default function SelectedTask() {
   const { selectedTask } = useContext(Context);
 
   const {
-    start, end, title, description, extendedProps: { contactId },
+    start, end, title, description, extendedProps,
   } = selectedTask;
 
-  const [inputData, setInputData] = useState({ title: '', description: '', status: 0 });
   const [isUpdating, setIsUpdating] = useState(false);
-
-  const onChange = (e) => {
-    setInputData({
-      ...inputData,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   useEffect(async () => {
     const localToken = localStorage.getItem('token');
-    const fetchData = await fetch(`http://localhost:3001/contact/${contactId}`, { headers: { Authorization: `Bearer ${localToken}` } });
+    const fetchData = await fetch(`http://localhost:3001/contact/${extendedProps?.contactId}`, { headers: { Authorization: `Bearer ${localToken}` } });
     const jsonData = await fetchData.json();
     setContactInfo(jsonData);
-  }, [contactId]);
+  }, [extendedProps?.contactId]);
 
   const handleDeleteTask = async () => {
     try {
       const localToken = localStorage.getItem('token');
-      const fetchData = await fetch(`http://localhost:3001/tasks/${contactId}`, { Authorization: `Bearer ${localToken}`, method: 'DELETE' });
+      const fetchData = await fetch(`http://localhost:3001/tasks/${extendedProps?.contactId}`, { Authorization: `Bearer ${localToken}`, method: 'DELETE' });
       const jsonData = await fetchData.json();
       toast.success(jsonData.message, toastOption);
     } catch (error) {
@@ -43,29 +35,15 @@ export default function SelectedTask() {
     }
   };
 
-  const handleUpdateTask = async () => {
-    try {
-      setIsUpdating(true);
-      const localToken = localStorage.getItem('token');
-      const fetchMethod = { Authorization: `Bearer ${localToken}`, method: 'PUT', body: JSON.stringify(inputData) };
-      const fetchData = await fetch(`http://localhost:3001/tasks/${contactId}`, fetchMethod);
-      const jsonData = await fetchData.json();
-      toast.success(jsonData.message, toastOption);
-      setIsUpdating(false);
-    } catch (error) {
-      toast.error(error.message, toastOption);
-    }
+  const handleUpdateClick = () => {
+    setIsUpdating(!isUpdating);
   };
 
   return (
     <div className="selected-task">
       {
         isUpdating ? (
-          <UpdatingForm
-            selectedTask={selectedTask}
-            onChange={onChange}
-            handleUpdateTask={handleUpdateTask}
-          />
+          <UpdatingForm contactId={extendedProps.contactId} setIsUpdating={setIsUpdating} />
         ) : (
           <>
             <p>{`Title: ${title}`}</p>
@@ -75,7 +53,7 @@ export default function SelectedTask() {
             <p>{`End Date: ${moment(end).format('DD/MM/YYYY')} ${moment(end).hours()}:${moment(end).minutes()}`}</p>
             <p>{`Duration: ${moment(end).diff(start, 'minutes')} minutes`}</p>
             <div>
-              <button onClick={handleUpdateTask} className="btn btn-warning" type="button">Edit</button>
+              <button onClick={handleUpdateClick} className="btn btn-warning" type="button">Edit</button>
               <button onClick={handleDeleteTask} className="btn btn-danger" type="button">Delete</button>
             </div>
           </>
