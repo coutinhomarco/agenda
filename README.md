@@ -21,7 +21,7 @@ Funcionalidades implementadas:
 <ol>
     <li>Sistema de cadastro e login utilizando autenticação com JWTOKEN ✅</li>
     <li>Sistema de cadastro e deleção de contatos por usuario ✅</li>
-    <li>Calendario com tasks relacionadas aos contatos 🔧</li>
+    <li>Calendario com tasks relacionadas aos contatos ✅</li>
     <li>Testes de front e back 🔧</li>
 </ol>
 
