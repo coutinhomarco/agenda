@@ -46,7 +46,7 @@ const destroy = async (req, res, next) => {
     const { contactId, userId } = req.ids;
     const task = await Tasks.findOne({ where: { contactId, userId } });
     if (!task) return res.status(404).json({ message: 'Task not found' });
-    await Tasks.destroy();
+    await Tasks.destroy({ where: { contactId, userId } });
     return res.status(204).json({ message: 'Task deleted' });
   } catch (error) {
     next(error);

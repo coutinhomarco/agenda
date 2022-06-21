@@ -27,7 +27,7 @@ export default function SelectedTask() {
   const handleDeleteTask = async () => {
     try {
       const localToken = localStorage.getItem('token');
-      const fetchData = await fetch(`http://localhost:3001/tasks/${extendedProps?.contactId}`, { Authorization: `Bearer ${localToken}`, method: 'DELETE' });
+      const fetchData = await fetch(`http://localhost:3001/tasks/${extendedProps?.contactId}`, { headers: { Authorization: `Bearer ${localToken}` }, method: 'DELETE' });
       const jsonData = await fetchData.json();
       toast.success(jsonData.message, toastOption);
     } catch (error) {
