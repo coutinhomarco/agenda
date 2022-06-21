@@ -30,7 +30,9 @@ export default function SelectedTask() {
     try {
       const localToken = localStorage.getItem('token');
       await fetch(`http://localhost:3001/tasks/${extendedProps?.contactId}`, { headers: { Authorization: `Bearer ${localToken}` }, method: 'DELETE' });
-      const remainingTasks = tasksList.filter((task) => task.id !== Number(extendedProps?.taskId));
+      const remainingTasks = tasksList
+        .filter((task) => task.extendedProps?.contactId !== Number(extendedProps?.contactId));
+      console.log(remainingTasks);
       setTasksList(remainingTasks);
       setSelectedTask(false);
     } catch (error) {

@@ -59,7 +59,7 @@ export default function TasksForm() {
     }
   };
   return (
-    <form onChange={onTaskInputChange} id="cf" className="tasks-form input-group calendar-form">
+    <form onSubmit={onSubmit} onChange={onTaskInputChange} id="cf" className="tasks-form input-group calendar-form">
       <label className="form-label" htmlFor="contacts">
         Select a contact
         <select value={inputDetails.contact} defaultValue="" name="contact" className="form-select" id="contacts">
@@ -67,7 +67,8 @@ export default function TasksForm() {
 
           {contacts && (contacts
             .map(({ contactId, name }) => {
-              if (tasksList?.some((task) => task.extendedProps?.contactId === contactId)) {
+              if (tasksList && tasksList
+                .some((task) => task.extendedProps?.contactId === contactId)) {
                 return null;
               }
               return <option key={contactId} value={contactId}>{name}</option>;
@@ -92,7 +93,7 @@ export default function TasksForm() {
           <option value="2">Done</option>
         </select>
       </label>
-      <button onClick={onSubmit} className="btn btn-primary" type="reset">Submit</button>
+      <button className="btn btn-primary" type="submit">Submit</button>
     </form>
   );
 }
