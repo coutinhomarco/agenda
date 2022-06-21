@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
 import Context from '../context/Context';
 import toastOption from '../toastifyOptions';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function TasksForm() {
   const {
@@ -34,13 +35,12 @@ export default function TasksForm() {
       const fetchData = await fetch(`http://localhost:3001/tasks/${contact}`, fetchMethod)
         .then((response) => response.json())
         .then((json) => json);
-
       setTasksList([...tasksList, {
         title,
         id: Number(fetchData.data.taskId),
         contactId: Number(contact),
-        start: taskStartDate,
-        end: taskEndDate,
+        start: taskStartDate.toISOString(),
+        end: taskEndDate.toISOString(),
       }]);
       toast.success(fetchData.message, toastOption);
     } catch (error) {
@@ -56,7 +56,8 @@ export default function TasksForm() {
 
           {contacts && (contacts
             .map(({ contactId, name }) => {
-              if (tasksList.some((task) => task.contactId === contactId)) {
+              if (tasksList && tasksList
+                .some((task) => task.extendedProps?.contactId === contactId)) {
                 return null;
               }
               return <option key={contactId} value={contactId}>{name}</option>;
