@@ -6,25 +6,15 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
-      contactId: {
-        unique: true,
+      userContactId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Contact',
-          key: 'contactId',
+          model: 'UserContact',
+          key: 'userContactId',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-      },
-      userId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'User',
-          key: 'userId',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-
+        allowNull: false,
       },
       title: {
         type: Sequelize.STRING,

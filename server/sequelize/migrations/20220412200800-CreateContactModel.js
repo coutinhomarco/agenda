@@ -18,16 +18,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      userId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'User',
-          key: 'userId',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
     });
   },
 

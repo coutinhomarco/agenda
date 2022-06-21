@@ -32,7 +32,6 @@ export default function SelectedTask() {
       await fetch(`http://localhost:3001/tasks/${extendedProps?.contactId}`, { headers: { Authorization: `Bearer ${localToken}` }, method: 'DELETE' });
       const remainingTasks = tasksList
         .filter((task) => task.extendedProps?.contactId !== Number(extendedProps?.contactId));
-      console.log(remainingTasks);
       setTasksList(remainingTasks);
       setSelectedTask(false);
     } catch (error) {

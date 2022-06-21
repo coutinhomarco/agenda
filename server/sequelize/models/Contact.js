@@ -5,16 +5,6 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
-      references: {
-        model: 'User',
-        key: 'userId',
-      },
-    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -33,9 +23,9 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Contact.associate = (models) => {
-    Contact.belongsTo(
-      models.User,
-      { foreignKey: 'userId', as: 'user' },
+    Contact.belongsToMany(
+      models.Tasks,
+      { foreignKey: 'tasksId', as: 'task', through: 'Tasks' },
     );
   };
 

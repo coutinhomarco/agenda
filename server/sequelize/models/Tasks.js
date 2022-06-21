@@ -7,21 +7,11 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      contactId: {
+      userContactId: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'Contact',
-          key: 'contactId',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-      userId: {
-        unique: true,
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'User',
-          key: 'userId',
+          model: 'UserContact',
+          key: 'userContactId',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
@@ -56,12 +46,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Task.associate = (models) => {
     Task.belongsTo(
-      models.Contact,
-      { foreignKey: 'contactId', as: 'contact' },
-    );
-    Task.belongsTo(
-      models.User,
-      { foreignKey: 'userId', as: 'user' },
+      models.UserContact,
+      { foreignKey: 'userContactId' },
     );
   };
 
