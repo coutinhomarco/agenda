@@ -8,8 +8,8 @@ export default function Provider({ children }) {
   const [contacts, setContacts] = useState([]);
   const [userDetails, setUserDetails] = useState({});
 
-  const [taskStartDate, setTaskStartDate] = useState(new Date());
-  const [taskEndDate, setTaskEndDate] = useState(new Date());
+  const [taskStartDate, setTaskStartDate] = useState();
+  const [taskEndDate, setTaskEndDate] = useState();
   const [tasksList, setTasksList] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
 

@@ -9,7 +9,9 @@ import UpdatingForm from './UpdatingForm';
 export default function SelectedTask() {
   const [contactInfo, setContactInfo] = useState({});
 
-  const { selectedTask } = useContext(Context);
+  const {
+    selectedTask, setSelectedTask, setTasksList, tasksList,
+  } = useContext(Context);
 
   const {
     start, end, title, description, extendedProps,
@@ -27,9 +29,10 @@ export default function SelectedTask() {
   const handleDeleteTask = async () => {
     try {
       const localToken = localStorage.getItem('token');
-      const fetchData = await fetch(`http://localhost:3001/tasks/${extendedProps?.contactId}`, { headers: { Authorization: `Bearer ${localToken}` }, method: 'DELETE' });
-      const jsonData = await fetchData.json();
-      toast.success(jsonData.message, toastOption);
+      await fetch(`http://localhost:3001/tasks/${extendedProps?.contactId}`, { headers: { Authorization: `Bearer ${localToken}` }, method: 'DELETE' });
+      const remainingTasks = tasksList.filter((task) => task.id !== Number(extendedProps?.taskId));
+      setTasksList(remainingTasks);
+      setSelectedTask(false);
     } catch (error) {
       toast.error(error.message, toastOption);
     }
