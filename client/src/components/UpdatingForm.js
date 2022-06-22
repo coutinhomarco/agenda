@@ -24,7 +24,7 @@ export default function UpdatingForm({ setIsUpdating, contactId }) {
       const fetchMethod = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localToken}` },
-        body: JSON.stringify({ ...inputData }),
+        body: JSON.stringify({ ...inputData, taskId: selectedTask.id }),
       };
       const fetchData = await fetch(`http://localhost:3001/tasks/${contactId}`, fetchMethod);
       const jsonData = await fetchData.json();

@@ -29,18 +29,20 @@ const update = async (req, res, next) => {
     const { contactId, userId } = req.ids;
     const userContact = await UserContact.findOne({ where: { userId, contactId }, attributes: ['userContactId'] });
     const userContactId = userContact?.dataValues?.userContactId;
-    const { title, description, status } = req.body;
+    const {
+      title, description, status, taskId,
+    } = req.body;
     const task = await Tasks.findOne({
       attributes: ['taskId', 'userContactId', 'title', 'description', 'status', 'taskStartDate', 'taskEndDate'],
-      where: { userContactId },
+      where: { userContactId, taskId },
     });
     if (!task) return res.status(404).json({ message: 'Task not found' });
     await Tasks.update({
       title, description, status,
-    }, { where: { userContactId } });
+    }, { where: { userContactId, taskId } });
     const taskUpdated = await Tasks.findOne({
       attributes: ['taskId', 'userContactId', 'title', 'description', 'status', 'taskStartDate', 'taskEndDate'],
-      where: { userContactId },
+      where: { userContactId, taskId },
     });
 
     return res.status(200).json({ message: 'Task updated', data: taskUpdated });
