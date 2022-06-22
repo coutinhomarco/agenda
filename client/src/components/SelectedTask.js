@@ -8,6 +8,8 @@ import UpdatingForm from './UpdatingForm';
 
 export default function SelectedTask() {
   const [contactInfo, setContactInfo] = useState({});
+  const [tagString, setTagString] = useState('');
+  const [isUpdating, setIsUpdating] = useState(false);
 
   const {
     selectedTask, setSelectedTask, setTasksList, tasksList,
@@ -17,13 +19,24 @@ export default function SelectedTask() {
     start, end, title, description, extendedProps,
   } = selectedTask;
 
-  const [isUpdating, setIsUpdating] = useState(false);
-
   useEffect(async () => {
     const localToken = localStorage.getItem('token');
     const fetchData = await fetch(`http://localhost:3001/contact/${extendedProps?.contactId}`, { headers: { Authorization: `Bearer ${localToken}` } });
     const jsonData = await fetchData.json();
     setContactInfo(jsonData);
+    const { tag } = extendedProps;
+    switch (tag) {
+      case 0:
+        return setTagString('Entertainment');
+      case 1:
+        return setTagString('Alimentation');
+      case 2:
+        return setTagString('Health');
+      case 3:
+        return setTagString('Work');
+      default:
+        return setTagString(null);
+    }
   }, [extendedProps?.contactId]);
 
   const handleDeleteTask = async () => {
@@ -52,7 +65,7 @@ export default function SelectedTask() {
           <>
             <p>{`Title: ${title}`}</p>
             <p>{`Contact related: ${contactInfo.name}`}</p>
-            <p>{`Tag: ${extendedProps.tag}`}</p>
+            <p>{`Tag: ${tagString}`}</p>
 
             <p>{`Description: ${description}`}</p>
             <p>{`Start Date: ${moment(start).format('DD/MM/YYYY')} ${moment(start).hours()}:${moment(start).minutes()}`}</p>

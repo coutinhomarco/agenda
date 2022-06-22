@@ -25,9 +25,9 @@ export default function Calendar() {
     const tasks = response.map(({ task, contactId }) => ({ ...task, contactId }));
     const taskArray = tasks
       .map(({
-        taskId, title, taskStartDate: start, taskEndDate: end, contactId, description,
+        taskId, title, taskStartDate: start, taskEndDate: end, contactId, description, tag,
       }) => ({
-        id: taskId, title, start, end, description, extendedProps: { contactId },
+        id: taskId, title, start, end, description, extendedProps: { contactId, tag },
       }));
     setTasksList(taskArray);
   };
