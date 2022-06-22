@@ -24,6 +24,7 @@ export default function TasksForm() {
       description: '',
       status: '',
       contact: '',
+      tag: '',
     });
   };
 
@@ -31,7 +32,7 @@ export default function TasksForm() {
     try {
       e.preventDefault();
       const {
-        contact, title, description, status,
+        contact, title, description, status, tag,
       } = inputDetails;
       const body = {
         contact,
@@ -54,7 +55,7 @@ export default function TasksForm() {
       setTasksList([...tasksList, {
         title,
         id: Number(newTask.dataValues.taskId),
-        extendedProps: { contactId: Number(contact) },
+        extendedProps: { contactId: Number(contact), tag },
         start: taskStartDate.toISOString(),
         end: taskEndDate.toISOString(),
         description,
@@ -96,12 +97,14 @@ export default function TasksForm() {
         </select>
       </label>
       <label className="form-label" htmlFor="tag">
-        Status
+        Tag
         <select value={inputDetails.tag} defaultValue="" name="tag" className="form-select" id="tag" type="number">
           <option value="" disabled>Select your option</option>
-          <option value="0">Fun</option>
-          <option value="1">In progress</option>
-          <option value="2">Done</option>
+          <option value="0">Entertainment</option>
+          <option value="1">Alimentation</option>
+          <option value="2">Health</option>
+          <option value="3">Work</option>
+
         </select>
       </label>
       <button className="btn btn-primary" type="submit">Submit</button>
