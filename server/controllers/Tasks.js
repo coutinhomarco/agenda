@@ -9,14 +9,14 @@ const create = async (req, res, next) => {
     const { contactId, userId } = req.ids;
     const {
       info: {
-        title, description, status, taskStartDate, taskEndDate,
+        title, description, status, taskStartDate, taskEndDate, tag,
       },
     } = req;
     const userContact = await UserContact.findOne({ where: { userId, contactId }, attributes: ['userContactId'] });
     const userContactId = userContact?.dataValues?.userContactId;
     if (!userContact) return res.status(404).json({ message: 'Contact is not related to User' });
     const task = await Tasks.create({
-      title, description, status, userContactId, taskStartDate, taskEndDate,
+      title, description, status, userContactId, taskStartDate, taskEndDate, tag,
     });
     return res.status(201).json({ message: 'Task created', data: { ...task, userId, contactId } });
   } catch (error) {
