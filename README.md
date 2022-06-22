@@ -8,14 +8,25 @@ Aplicação Fullstack que representa uma agenda telefonica.
 # Foi utilizado SSH
 $ git clone git@github.com:coutinhomarco/agenda.git
 
-Recomendo a utilização de dois terminais (um para cada parte)
+Recomendo a utilização de dois terminais (um para cada ponta da aplicação)
 ````
 
+<h2>Essa aplicação roda no Node versão 14 LTS</h2>
+<p>Para utilizar a versão correta utilize o nvm (Node Version Manager)</p>
+<p>Basta executar os seguintes comandos:</p>
+
+
 ````
+nvm install 14
+nvm use 14
+````
+
+
+
 Acesse as pastas client e server 
 para receber instruções em como rodar o front end e back end 
 respectivamente.
-````
+
 
 Funcionalidades implementadas:
 <ol>
