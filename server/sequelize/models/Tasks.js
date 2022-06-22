@@ -29,7 +29,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-
+      tag: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       taskStartDate: {
         type: DataTypes.DATE,
         allowNull: false,

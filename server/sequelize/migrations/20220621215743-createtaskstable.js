@@ -28,6 +28,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      tag: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       taskStartDate: {
         type: Sequelize.DATE,
         allowNull: false,
