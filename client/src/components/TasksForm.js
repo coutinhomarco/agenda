@@ -15,7 +15,7 @@ export default function TasksForm() {
     setInputDetails({ ...inputDetails, [e.target.name]: e.target.value });
   };
 
-  const resetState = () => {
+  const resetFormState = () => {
     setSelectedTask(false);
     setTaskStartDate(null);
     setTaskEndDate(null);
@@ -49,14 +49,17 @@ export default function TasksForm() {
       const fetchData = await fetch(`http://localhost:3001/tasks/${contact}`, fetchMethod)
         .then((response) => response.json())
         .then((json) => json);
+      const newTask = fetchData.data;
+      console.log(newTask);
       setTasksList([...tasksList, {
         title,
-        id: Number(fetchData.data.taskId),
-        contactId: Number(contact),
+        id: Number(newTask.dataValues.taskId),
+        extendedProps: { contactId: Number(contact) },
         start: taskStartDate.toISOString(),
         end: taskEndDate.toISOString(),
+        description,
       }]);
-      resetState();
+      resetFormState();
       toast.success(fetchData.message, toastOption);
     } catch (error) {
       toast.error(error.message, toastOption);

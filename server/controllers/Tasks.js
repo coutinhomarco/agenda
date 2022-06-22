@@ -18,7 +18,7 @@ const create = async (req, res, next) => {
     const task = await Tasks.create({
       title, description, status, userContactId, taskStartDate, taskEndDate,
     });
-    return res.status(201).json({ message: 'Task created', data: [task] });
+    return res.status(201).json({ message: 'Task created', data: { ...task, userId, contactId } });
   } catch (error) {
     next(error);
   }
