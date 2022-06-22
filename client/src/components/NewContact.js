@@ -33,8 +33,9 @@ export default function NewContact() {
       const fetchData = await fetch('http://localhost:3001/contact', fetchMethod)
         .then((response) => response.json())
         .then((json) => json);
+
+      await setContacts([...contacts, fetchData.data.dataValues]);
       toast.success(fetchData.message, toastOption);
-      await setContacts([...contacts, fetchData.data]);
       localStorage.setItem('contacts', JSON.stringify(contacts));
     } catch (error) {
       toast.fail(error.message, toastOption);

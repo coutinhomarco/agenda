@@ -22,7 +22,8 @@ export default function Calendar() {
       headers: { Authorization: `Bearer ${localStorageToken}`, 'Content-Type': 'application/json' },
     };
     const response = await fetch('http://localhost:3001/tasks', fetchMethod).then((res) => res.json());
-    const taskArray = response
+    const tasks = response.map((obj) => (obj.task));
+    const taskArray = tasks
       .map(({
         taskId, title, taskStartDate: start, taskEndDate: end, contactId, description,
       }) => ({

@@ -18,13 +18,14 @@ export default function Agenda() {
     try {
       const localToken = localStorage.getItem('token');
       const fetchData = await fetch('http://localhost:3001/contact', { headers: { Authorization: `Bearer ${token || localToken}` } });
-      const jsonData = await fetchData.json();
+      const [jsonData] = await fetchData.json();
+      const { contact } = jsonData;
       if (!userDetails.name) {
         const localUserDetails = localStorage.getItem('userDetails');
         setUserDetails(JSON.parse(localUserDetails));
       }
-      setContacts(jsonData.sort((a, b) => a.contactId - b.contactId));
-      localStorage.setItem('contacts', JSON.stringify(jsonData.sort((a, b) => a.contactId - b.contactId)));
+      setContacts(contact.sort((a, b) => a.contactId - b.contactId));
+      localStorage.setItem('contacts', JSON.stringify(contact.sort((a, b) => a.contactId - b.contactId)));
     } catch (error) {
       toast.error(error.message, toastOption);
     }
@@ -74,15 +75,13 @@ export default function Agenda() {
           )}
           <aside className="center">
             {contacts.sort((a, b) => (a.name > b.name ? 1 : -1))
-              .map(({
-                name, email, phoneNumber, contactId,
-              }) => (
+              .map((contact) => (
                 <Contact
-                  key={contactId}
-                  name={name}
-                  email={email}
-                  phoneNumber={phoneNumber}
-                  contactId={contactId}
+                  key={contact?.contactId}
+                  name={contact?.name}
+                  email={contact?.email}
+                  phoneNumber={contact?.phoneNumber}
+                  contactId={contact?.contactId}
                 />
               ))}
           </aside>
