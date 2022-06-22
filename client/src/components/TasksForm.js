@@ -1,5 +1,5 @@
 /* eslint-disable react/button-has-type */
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
 import Context from '../context/Context';
 import toastOption from '../toastifyOptions';
@@ -8,16 +8,12 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function TasksForm() {
   const {
     contacts, tasksList, setTasksList, token, inputDetails, setInputDetails, taskEndDate,
-    taskStartDate, setTaskEndDate, setTaskStartDate, setContacts, setSelectedTask,
+    taskStartDate, setTaskEndDate, setTaskStartDate, setSelectedTask,
   } = useContext(Context);
 
   const onTaskInputChange = (e) => {
     setInputDetails({ ...inputDetails, [e.target.name]: e.target.value });
   };
-
-  useEffect(() => {
-    setContacts([...contacts]);
-  }, [tasksList]);
 
   const onSubmit = async (e) => {
     try {
@@ -88,6 +84,15 @@ export default function TasksForm() {
         <select value={inputDetails.status} defaultValue="" name="status" className="form-select" id="status" type="number">
           <option value="" disabled>Select your option</option>
           <option value="0">To do</option>
+          <option value="1">In progress</option>
+          <option value="2">Done</option>
+        </select>
+      </label>
+      <label className="form-label" htmlFor="tag">
+        Status
+        <select value={inputDetails.tag} defaultValue="" name="tag" className="form-select" id="tag" type="number">
+          <option value="" disabled>Select your option</option>
+          <option value="0">Fun</option>
           <option value="1">In progress</option>
           <option value="2">Done</option>
         </select>
