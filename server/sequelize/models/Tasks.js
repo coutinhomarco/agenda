@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       userContactId: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
           model: 'UserContact',
           key: 'userContactId',
@@ -43,13 +44,6 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'Tasks',
     },
   );
-
-  Task.associate = (models) => {
-    Task.belongsTo(
-      models.UserContact,
-      { foreignKey: 'userContactId' },
-    );
-  };
 
   return Task;
 };

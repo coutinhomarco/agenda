@@ -9,6 +9,14 @@ module.exports = {
         taskStartDate: new Date(),
         taskEndDate: new Date(),
       },
+      {
+        userContactId: 2,
+        title: 'Buy food for the dinner',
+        description: 'Buy food for the dinner',
+        status: 0,
+        taskStartDate: new Date(),
+        taskEndDate: new Date(),
+      },
     ]);
   },
 
