@@ -1,10 +1,10 @@
-const { User } = require('../sequelize/models');
+const { User } = require('../models/User');
 const { generateToken } = require('../middleware/auth');
 
 const create = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
-    await User.create({ name, email, password });
+    await User.create({ name, email, password }, next);
     return res.status(201).json({ message: 'User created successfully' });
   } catch (error) {
     next(error);
@@ -14,13 +14,9 @@ const create = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   try {
     const { userId } = req.tokenData;
-    const user = await User.findOne({ where: { userId } });
+    const user = await User.findOne({ userId }, next);
     if (!user) return res.status(404).json({ message: 'User not found' });
-    await User.destroy({
-      where: {
-        userId,
-      },
-    });
+    await User.destroy({ userId }, next);
     return res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {
     next(error);
