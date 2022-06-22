@@ -14,7 +14,7 @@ export default function SelectedTask() {
   } = useContext(Context);
 
   const {
-    start, end, title, description, extendedProps, tag,
+    start, end, title, description, extendedProps,
   } = selectedTask;
 
   const [isUpdating, setIsUpdating] = useState(false);
@@ -52,7 +52,7 @@ export default function SelectedTask() {
           <>
             <p>{`Title: ${title}`}</p>
             <p>{`Contact related: ${contactInfo.name}`}</p>
-            <p>{`Tag: ${tag}`}</p>
+            <p>{`Tag: ${extendedProps.tag}`}</p>
 
             <p>{`Description: ${description}`}</p>
             <p>{`Start Date: ${moment(start).format('DD/MM/YYYY')} ${moment(start).hours()}:${moment(start).minutes()}`}</p>

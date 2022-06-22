@@ -4,6 +4,7 @@ const validateBodyInfo = (req, res, next) => {
     const {
       title, description, status, tag,
     } = req.body;
+    const tagNumber = Number(tag);
     if (!title) {
       return res.status(400).json({ message: 'Title is required' });
     }
@@ -13,9 +14,10 @@ const validateBodyInfo = (req, res, next) => {
     if (status > 2 || status < 0) {
       return res.status(400).json({ message: 'Status is required' });
     }
-    if (tag > 3 || tag < 0) {
+    if (tagNumber > 3 || tagNumber < 0) {
       return res.status(400).json({ message: 'Tag is required' });
     }
+    req.body.tag = tagNumber;
     next();
   } catch (error) {
     next(error);

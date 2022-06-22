@@ -12,6 +12,7 @@ const create = async (req, res, next) => {
         title, description, status, taskStartDate, taskEndDate, tag,
       },
     } = req;
+    console.log(tag);
     const userContact = await UserContact.findOne({ where: { userId, contactId }, attributes: ['userContactId'] });
     const userContactId = userContact?.dataValues?.userContactId;
     if (!userContact) return res.status(404).json({ message: 'Contact is not related to User' });
