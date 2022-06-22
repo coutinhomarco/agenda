@@ -30,12 +30,18 @@ const update = async (req, res, next) => {
     const userContact = await UserContact.findOne({ where: { userId, contactId }, attributes: ['userContactId'] });
     const userContactId = userContact?.dataValues?.userContactId;
     const { title, description, status } = req.body;
-    const task = await Tasks.findOne({ where: { userContactId } });
+    const task = await Tasks.findOne({
+      attributes: ['taskId', 'userContactId', 'title', 'description', 'status', 'taskStartDate', 'taskEndDate'],
+      where: { userContactId },
+    });
     if (!task) return res.status(404).json({ message: 'Task not found' });
     await Tasks.update({
       title, description, status,
     }, { where: { userContactId } });
-    const taskUpdated = await Tasks.findOne({ where: { userContactId } });
+    const taskUpdated = await Tasks.findOne({
+      attributes: ['taskId', 'userContactId', 'title', 'description', 'status', 'taskStartDate', 'taskEndDate'],
+      where: { userContactId },
+    });
 
     return res.status(200).json({ message: 'Task updated', data: taskUpdated });
   } catch (error) {
@@ -48,7 +54,10 @@ const findOne = async (req, res, next) => {
     const { contactId, userId } = req.ids;
     const userContact = await UserContact.findOne({ where: { userId, contactId }, attributes: ['userContactId'] });
     const userContactId = userContact?.dataValues?.userContactId;
-    const task = await Tasks.findOne({ where: { userContactId } });
+    const task = await Tasks.findOne({
+      attributes: ['taskId', 'userContactId', 'title', 'description', 'status', 'taskStartDate', 'taskEndDate'],
+      where: { userContactId },
+    });
     if (!task) return res.status(404).json({ message: 'Task not found' });
     return res.status(200).json(task);
   } catch (error) {
@@ -61,7 +70,10 @@ const destroy = async (req, res, next) => {
     const { contactId, userId } = req.ids;
     const userContact = await UserContact.findOne({ where: { userId, contactId }, attributes: ['userContactId'] });
     const userContactId = userContact?.dataValues?.userContactId;
-    const task = await Tasks.findOne({ where: { userContactId } });
+    const task = await Tasks.findAll({
+      attributes: ['taskId', 'userContactId', 'title', 'description', 'status', 'taskStartDate', 'taskEndDate'],
+      where: { userContactId },
+    });
     if (!task) return res.status(404).json({ message: 'Task not found' });
     await Tasks.destroy({ where: { userContactId } });
     return res.status(204).end();
@@ -75,7 +87,6 @@ const findAll = async (req, res, next) => {
     const { userId } = req.tokenData;
     const tasks = await UserContact.findAll({
       where: { userId },
-      attributes: ['userContactId'],
       include: [
         {
           model: Tasks,
