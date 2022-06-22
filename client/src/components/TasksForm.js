@@ -15,6 +15,18 @@ export default function TasksForm() {
     setInputDetails({ ...inputDetails, [e.target.name]: e.target.value });
   };
 
+  const resetState = () => {
+    setSelectedTask(false);
+    setTaskStartDate(null);
+    setTaskEndDate(null);
+    setInputDetails({
+      title: '',
+      description: '',
+      status: '',
+      contact: '',
+    });
+  };
+
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -44,15 +56,7 @@ export default function TasksForm() {
         start: taskStartDate.toISOString(),
         end: taskEndDate.toISOString(),
       }]);
-      setSelectedTask(false);
-      setTaskStartDate(null);
-      setTaskEndDate(null);
-      setInputDetails({
-        title: '',
-        description: '',
-        status: '',
-        contact: '',
-      });
+      resetState();
       toast.success(fetchData.message, toastOption);
     } catch (error) {
       toast.error(error.message, toastOption);
