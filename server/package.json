@@ -16,8 +16,8 @@
     "swagger-ui-express": "^4.4.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "drop": "npx sequelize db:drop",
     "create": "npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
     "all": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all"
