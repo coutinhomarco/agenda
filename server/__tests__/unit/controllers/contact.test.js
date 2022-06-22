@@ -1,7 +1,7 @@
 const {execSync} = require('child_process')
 const {Contact, UserContact} = require('../../../sequelize/models')
 
-describe('Test the Contact controller', () => {
+describe('Test the Contact model', () => {
     beforeEach(() => {
         execSync('npm run all')
     })

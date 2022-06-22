@@ -138,6 +138,21 @@ main{
   margin-bottom: 5px;
 }
 
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-size: 15px !important;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-size: 15px !important;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  font-size: 15px !important;
+}
+:-moz-placeholder { /* Firefox 18- */
+  font-size: 15px !important;
+}
+
+
 .date-input input, select, button {
   max-height: 34px;
 }
@@ -148,11 +163,17 @@ main{
 }
 
 .datepicker{
+  height: 28px !important;
   border-radius: 0.25rem;
+  width: fit-content;
+}
 
+.contact{
+  font-size: 15px !important;
 }
 
 .react-datepicker-wrapper{
+  width: fit-content;
   align-items: center;
   justify-content: center;
   margin-bottom: 0.5rem;
@@ -244,7 +265,6 @@ main{
   justify-items: stretch;
 }
 
-
 .contact-card{
   border-bottom: 0.0005em solid white;
   display: flex;
@@ -310,4 +330,14 @@ main{
 
 .form-label{
   margin-bottom: 0.3rem !important;
+}
+
+.form-control{
+  height: 28px !important;
+}
+
+.form-select{
+  height: 28px !important;
+  padding: 3px;
+  text-align: center;
 }

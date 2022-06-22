@@ -66,7 +66,7 @@ export default function Calendar() {
             center: 'title',
             left: 'dayGridMonth,timeGridWeek,timeGridDay',
           }}
-          height="78vh"
+          height="80vh"
           eventClick={handleEventClick}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           events={tasksList}

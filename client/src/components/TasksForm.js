@@ -75,7 +75,7 @@ export default function TasksForm() {
           <option value="" disabled>Select your option</option>
 
           {contacts && (contacts.map(({ contactId, name }) => (
-            <option key={contactId} value={contactId}>{name}</option>)))}
+            <option className="contact" key={contactId} value={contactId}>{name}</option>)))}
 
         </select>
       </label>

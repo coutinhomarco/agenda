@@ -1,6 +1,5 @@
-const {
-  Contact, UserContact, User,
-} = require('../sequelize/models');
+const Contact = require('../models/Contact');
+const UserContact = require('../models/UserContact');
 
 const create = async (req, res, next) => {
   try {
@@ -9,8 +8,8 @@ const create = async (req, res, next) => {
     } = req.body;
     const contact = await Contact.create({
       name, email, phoneNumber,
-    });
-    await UserContact.create({ userId, contactId: contact.contactId });
+    }, next);
+    await UserContact.create({ userId, contactId: contact.contactId }, next);
     const returnedObject = { ...contact, userId };
     return res.status(201).json({ message: 'Contact created successfully', data: returnedObject });
   } catch (error) {
@@ -21,13 +20,9 @@ const create = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   try {
     const { contactId } = req.params;
-    const contact = await Contact.findOne({ where: { contactId } });
+    const contact = await Contact.findOne({ contactId }, next);
     if (!contact) return res.status(404).json({ message: 'Contact not found' });
-    await Contact.destroy({
-      where: {
-        contactId,
-      },
-    });
+    await Contact.destroy({ contactId }, next);
     return res.status(200).json({ message: 'Contact deleted successfully' });
   } catch (error) {
     next(error);
@@ -37,15 +32,8 @@ const destroy = async (req, res, next) => {
 const findAll = async (req, res, next) => {
   try {
     const { userId } = req.tokenData;
-    const a = await User.findAll({
-      where: { userId },
-      include: [
-        {
-          model: Contact, as: 'contact', through: UserContact, required: true, attribute: ['contact'],
-        },
-      ],
-    });
-    return res.status(200).json(a);
+    const allContacts = await Contact.findAll({ userId }, next);
+    return res.status(200).json(allContacts);
   } catch (error) {
     next(error);
   }
