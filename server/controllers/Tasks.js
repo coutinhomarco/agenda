@@ -1,8 +1,7 @@
 /* eslint-disable max-len */
-const {
-  Tasks, UserContact,
-  User,
-} = require('../sequelize/models');
+
+const UserContact = require('../models/UserContact');
+const Tasks = require('../models/Tasks');
 
 const create = async (req, res, next) => {
   try {
@@ -12,7 +11,7 @@ const create = async (req, res, next) => {
         title, description, status, taskStartDate, taskEndDate, tag,
       },
     } = req;
-    const userContact = await UserContact.findOne({ where: { userId, contactId }, attributes: ['userContactId'] });
+    const userContact = await UserContact.findOne({ userId, contactId }, ['userContactId']);
     const userContactId = userContact?.dataValues?.userContactId;
     if (!userContact) return res.status(404).json({ message: 'Contact is not related to User' });
     const task = await Tasks.create({
@@ -27,22 +26,30 @@ const create = async (req, res, next) => {
 const update = async (req, res, next) => {
   try {
     const { contactId, userId } = req.ids;
-    const userContact = await UserContact.findOne({ where: { userId, contactId }, attributes: ['userContactId'] });
+    const userContact = await UserContact.findOne({ userId, contactId }, ['userContactId']);
     const userContactId = userContact?.dataValues?.userContactId;
     const {
       title, description, status, taskId,
     } = req.body;
     const task = await Tasks.findOne({
       attributes: ['taskId', 'userContactId', 'title', 'description', 'status', 'taskStartDate', 'taskEndDate'],
-      where: { userContactId, taskId },
+      userContactId,
+      taskId,
     });
+
     if (!task) return res.status(404).json({ message: 'Task not found' });
+
     await Tasks.update({
-      title, description, status,
-    }, { where: { userContactId, taskId } });
+      title,
+      description,
+      status,
+      userContactId,
+      taskId,
+    });
     const taskUpdated = await Tasks.findOne({
       attributes: ['taskId', 'userContactId', 'title', 'description', 'status', 'taskStartDate', 'taskEndDate'],
-      where: { userContactId, taskId },
+      userContactId,
+      taskId,
     });
 
     return res.status(200).json({ message: 'Task updated', data: taskUpdated });
@@ -70,14 +77,11 @@ const findOne = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   try {
     const { contactId, userId } = req.ids;
-    const userContact = await UserContact.findOne({ where: { userId, contactId }, attributes: ['userContactId'] });
+    const userContact = await UserContact.findOne({ userId, contactId }, ['userContactId']);
     const userContactId = userContact?.dataValues?.userContactId;
-    const task = await Tasks.findAll({
-      attributes: ['taskId', 'userContactId', 'title', 'description', 'status', 'taskStartDate', 'taskEndDate'],
-      where: { userContactId },
-    });
+    const [task] = await Tasks.findAll({ userId });
     if (!task) return res.status(404).json({ message: 'Task not found' });
-    await Tasks.destroy({ where: { userContactId } });
+    await Tasks.destroy({ userContactId, taskId: task?.dataValues?.task?.dataValues?.taskId });
     return res.status(204).end();
   } catch (error) {
     next(error);
@@ -87,22 +91,7 @@ const destroy = async (req, res, next) => {
 const findAll = async (req, res, next) => {
   try {
     const { userId } = req.tokenData;
-    const tasks = await UserContact.findAll({
-      where: { userId },
-      include: [
-        {
-          model: Tasks,
-          as: 'task',
-          required: true,
-          attributes: ['taskId', 'title', 'description', 'status', 'taskStartDate', 'taskEndDate', 'tag'],
-        },
-        {
-          model: User,
-          as: 'user',
-          attributes: { exclude: ['password', 'email'] },
-        },
-      ],
-    });
+    const tasks = await UserContact.findAll({ userId });
     return res.status(200).json(tasks);
   } catch (error) {
     next(error);

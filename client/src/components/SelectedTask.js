@@ -16,7 +16,7 @@ export default function SelectedTask() {
   } = useContext(Context);
 
   const {
-    start, end, title, description, extendedProps,
+    start, end, title, description, extendedProps, id,
   } = selectedTask;
 
   useEffect(async () => {
@@ -44,7 +44,7 @@ export default function SelectedTask() {
       const localToken = localStorage.getItem('token');
       await fetch(`http://localhost:3001/tasks/${extendedProps?.contactId}`, { headers: { Authorization: `Bearer ${localToken}` }, method: 'DELETE' });
       const remainingTasks = tasksList
-        .filter((task) => task.extendedProps?.contactId !== Number(extendedProps?.contactId));
+        .filter((task) => task?.id !== Number(id));
       setTasksList(remainingTasks);
       setSelectedTask(false);
     } catch (error) {

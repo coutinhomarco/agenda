@@ -4,7 +4,7 @@ const { generateToken } = require('../middleware/auth');
 const create = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
-    await User.create({ name, email, password }, next);
+    await User.create({ name, email, password });
     return res.status(201).json({ message: 'User created successfully' });
   } catch (error) {
     next(error);
@@ -14,9 +14,9 @@ const create = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   try {
     const { userId } = req.tokenData;
-    const user = await User.findOne({ userId }, next);
+    const user = await User.findOne({ userId });
     if (!user) return res.status(404).json({ message: 'User not found' });
-    await User.destroy({ userId }, next);
+    await User.destroy({ userId });
     return res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {
     next(error);
