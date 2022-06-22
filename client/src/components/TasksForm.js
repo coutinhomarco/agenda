@@ -69,14 +69,6 @@ export default function TasksForm() {
   return (
     <form onSubmit={onSubmit} onChange={onTaskInputChange} id="cf" className="tasks-form input-group calendar-form">
 
-      <label className="form-label" htmlFor="title">
-        Title
-        <input value={inputDetails.title} name="title" className="form-control" id="title" type="text" />
-      </label>
-      <label className="form-label" htmlFor="description">
-        Description
-        <input value={inputDetails.description} name="description" className="form-control" id="description" type="text" />
-      </label>
       <label className="form-label" htmlFor="contacts">
         Select a contact
         <select value={inputDetails.contact} defaultValue="" name="contact" className="form-select" id="contacts">
@@ -86,6 +78,14 @@ export default function TasksForm() {
             <option key={contactId} value={contactId}>{name}</option>)))}
 
         </select>
+      </label>
+      <label className="form-label" htmlFor="title">
+        Title
+        <input value={inputDetails.title} name="title" className="form-control" id="title" type="text" />
+      </label>
+      <label className="form-label" htmlFor="description">
+        Description
+        <input value={inputDetails.description} name="description" className="form-control" id="description" type="text" />
       </label>
       <label className="form-label" htmlFor="status">
         Status
