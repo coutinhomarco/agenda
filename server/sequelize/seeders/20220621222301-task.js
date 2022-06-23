@@ -19,6 +19,15 @@ module.exports = {
         taskStartDate: new Date(),
         taskEndDate: new Date(),
       },
+      {
+        userContactId: 3,
+        title: 'Buy food for the lunch',
+        description: 'Buy food for the lunch',
+        status: 2,
+        tag: 1,
+        taskStartDate: new Date('2022-06-21 9:48:27'),
+        taskEndDate: new Date('2022-06-21 10:13:36'),
+      }
     ]);
   },
 
