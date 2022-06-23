@@ -32,20 +32,12 @@ $ npm start
 
 ```
 
-Entre com um dos dois usuários já criados:
+Entre com o usuários já criados (o banco já está populado):
 
 ````
     {
         email: "marco@gmail.com",
         password: "12345678"
-    },
-    {
-        
-        email: 'travolta@gmail.com',
-        password: '12345678',
-    },
-    {
-        email: 'johncena@wwe.com',
-        password: '12345678',
     }
 ````
+Ou caso queira criar seu próprio usuário, basta acessar a pagina de registro.

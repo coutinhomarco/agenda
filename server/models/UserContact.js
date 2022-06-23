@@ -1,5 +1,8 @@
 const { UserContact } = require('../sequelize/models');
-const { User, Tasks } = require('../sequelize/models');
+const {
+  // User,
+  Tasks,
+} = require('../sequelize/models');
 
 const create = async ({ userId, contactId }) => {
   const userContact = await UserContact.create({
@@ -22,7 +25,22 @@ const findOne = async ({ userId, contactId }, attributes) => {
   return userContact;
 };
 
-const findAll = async ({ userId }) => {
+const findAll = async ({ userId, userContactId }) => {
+  if (userContactId) {
+    const tasksWitWhere = await UserContact.findAll({
+      where: { userId, userContactId },
+      include: [
+        {
+          model: Tasks,
+          as: 'task',
+          required: true,
+          attributes: ['taskId', 'title', 'description', 'status', 'taskStartDate', 'taskEndDate', 'tag'],
+        },
+      ],
+    });
+
+    return tasksWitWhere;
+  }
   const tasks = await UserContact.findAll({
     where: { userId },
     include: [
@@ -31,11 +49,6 @@ const findAll = async ({ userId }) => {
         as: 'task',
         required: true,
         attributes: ['taskId', 'title', 'description', 'status', 'taskStartDate', 'taskEndDate', 'tag'],
-      },
-      {
-        model: User,
-        as: 'user',
-        attributes: { exclude: ['password', 'email'] },
       },
     ],
   });

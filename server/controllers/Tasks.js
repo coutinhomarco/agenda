@@ -79,7 +79,7 @@ const destroy = async (req, res, next) => {
     const { contactId, userId } = req.ids;
     const userContact = await UserContact.findOne({ userId, contactId }, ['userContactId']);
     const userContactId = userContact?.dataValues?.userContactId;
-    const [task] = await Tasks.findAll({ userId });
+    const [task] = await Tasks.findAll({ userId, userContactId });
     if (!task) return res.status(404).json({ message: 'Task not found' });
     await Tasks.destroy({ userContactId, taskId: task?.dataValues?.task?.dataValues?.taskId });
     return res.status(204).end();

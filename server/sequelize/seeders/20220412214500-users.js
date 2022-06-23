@@ -7,16 +7,6 @@ module.exports = {
         email: 'marco@gmail.com',
         password: '12345678',
       },
-      {
-        name: 'John Travolta',
-        email: 'travolta@gmail.com',
-        password: '12345678',
-      },
-      {
-        name: 'John Cena',
-        email: 'johncena@wwe.com',
-        password: '12345678',
-      },
     ],
 
     {},

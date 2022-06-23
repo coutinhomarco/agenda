@@ -14,6 +14,6 @@
         "treatUndefinedAsUnspecified": 0,
         "consistent-return": 0
     },
-    "ignorePatterns": ["node_modules/", "/sequelize", "/__tests__"]
+    "ignorePatterns": ["node_modules/", "/sequelize", "/__tests__", "/middleware/errorHandler.js"]
 
 }

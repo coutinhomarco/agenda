@@ -35,8 +35,8 @@ const destroy = async ({ userContactId, taskId }) => {
   await Tasks.destroy({ where: { userContactId, taskId } });
 };
 
-const findAll = async ({ userId }) => {
-  const tasks = await UserContact.findAll({ userId });
+const findAll = async ({ userId, userContactId }) => {
+  const tasks = await UserContact.findAll({ userId, userContactId });
   return tasks;
 };
 

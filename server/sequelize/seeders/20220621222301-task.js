@@ -27,6 +27,15 @@ module.exports = {
         tag: 1,
         taskStartDate: new Date('2022-06-21 9:48:27'),
         taskEndDate: new Date('2022-06-21 10:13:36'),
+      },
+      {
+        userContactId: 4,
+        title: 'Build a new portfolio',
+        description: 'create a new web dev portfolio',
+        status: 0,
+        tag: 3,
+        taskStartDate: new Date('2022-06-25 9:48:27'),
+        taskEndDate: new Date('2022-06-25 10:13:36'),
       }
     ]);
   },
