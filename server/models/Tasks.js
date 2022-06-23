@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+const { Op } = require('sequelize');
 const {
   Tasks,
 } = require('../sequelize/models');
@@ -39,6 +40,15 @@ const findAll = async ({ userId }) => {
   return tasks;
 };
 
+const findByQuery = async ({ query }) => {
+  const tasks = await Tasks.findAll({
+    where: {
+      title: { [Op.like]: `%${query}%` },
+    },
+  });
+  return tasks;
+};
+
 module.exports = {
-  create, findOne, destroy, update, findAll,
+  create, findOne, destroy, update, findAll, findByQuery,
 };

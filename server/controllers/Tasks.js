@@ -98,6 +98,16 @@ const findAll = async (req, res, next) => {
   }
 };
 
+const findByQuery = async (req, res, next) => {
+  try {
+    const { q } = req.query;
+    const tasks = findByQuery({ q });
+    return res.status(200).json(tasks);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
-  create, findOne, destroy, update, findAll,
+  create, findOne, destroy, update, findAll, findByQuery,
 };
