@@ -2,6 +2,7 @@ const {execSync} = require('child_process')
 const Contact = require('../../models/Contact')
 const UserContact = require('../../models/UserContact')
 const User = require('../../models/User')
+const Tasks = require('../../models/Tasks')
 
 describe('Test the Contact model', () => {
     execSync('npm run all')
@@ -86,4 +87,65 @@ describe('Test the User  model', () => {
         expect(user).toBeDefined();
     })
 })
-describe('Test the UserContact model', () => {})
+describe('Test the UserContact model', () => {
+    execSync('npm run all')
+    it('should create a new userContact', async () => {
+        const userId = 3
+        const contactId = 6
+        const userContact = await UserContact.create({ userId, contactId });
+        expect(userContact).toBeDefined();
+        expect(userContact.dataValues).toMatchObject({ userId, contactId });
+    })
+    it('should find a userContact', async () => {
+        const userId = 1
+        const contactId = 1
+        const userContact = await UserContact.findOne({ userId, contactId });
+        if (!userContact) return expect(userContact).toBe(null);
+        expect(userContact).toBeDefined();
+    })
+})
+describe('Test the Tasks model', () => {
+    execSync('npm run all')
+    it('should create a new task', async () => {
+        const userId = 1
+        const taskObject = {
+            userContactId: 3,
+            title: 'Buy milk',
+            description: 'Buy milk',
+            taskStartDate: '2020-01-01',
+            taskEndDate: '2020-01-01',
+            tag: 1,
+            status: 2,
+        }
+        const task = await Tasks.create(taskObject);
+        expect(task).toBeDefined();
+    })
+    it('should delete a task', async () => {
+        const taskId = 1
+        const userContactId = 1
+        let task = await Tasks.findOne({ taskId, userContactId, attributes: ['taskId', 'userContactId', 'title', 'description', 'taskStartDate', 'taskEndDate', 'tag', 'status'] });
+        if (!task) return expect(task).toBe(null);
+        await Tasks.destroy( { taskId, userContactId })
+        task = await Tasks.findOne({ taskId,userContactId ,attributes: ['taskId', 'userContactId', 'title', 'description', 'status', 'taskStartDate', 'taskEndDate'] });
+        expect(task).toBe(null);
+    })
+    it('should find all tasks', async () => {
+        const userId = 1 
+        const allTasks = await Tasks.findAll({ userId });
+        expect(allTasks).toBeDefined();
+    })
+    it('should find 1 tasks', async () => {
+        const userId = 1 
+        const allTasks = await Tasks.findAll({ userId });
+        expect(allTasks).toBeDefined();
+        expect(allTasks[0]?.task?.dataValues).toBeDefined();
+    })
+    it('should find a task', async () => {
+        const userContactId = 1
+        const taskId = 1
+        const attributes = ['taskId', 'userContactId', 'title', 'description', 'taskStartDate', 'taskEndDate', 'tag', 'status']
+        const task = await Tasks.findOne({ userContactId, taskId, attributes });
+        if (!task) return expect(task).toBe(null);
+        expect(task).toBeDefined();
+    })
+})
