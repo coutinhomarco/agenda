@@ -4,7 +4,7 @@ const { generateToken } = require('../middleware/auth');
 const create = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
-    await User.create({ name, email, password });
+    await User?.create({ name, email, password });
     return res.status(201).json({ message: 'User created successfully' });
   } catch (error) {
     next(error);
