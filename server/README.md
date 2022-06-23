@@ -12,6 +12,7 @@
     <li>sequelize</li>
     <li>sequelize-cli</li>
     <li>dotenv</li>
+    <li>Jest</li>
 
 </ul>
 <hr>

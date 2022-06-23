@@ -7,8 +7,12 @@
     <li>Toastify</li>
     <li>React Router Dom</li>
     <li>FullCalendar</li>
-    <li>Jest</li>
     <li>Bootstrap</li>
+    <li>Moment</li>
+    <li>datefns</li>
+    <li>React datepicker</li>
+
+
 
 
 </ul>

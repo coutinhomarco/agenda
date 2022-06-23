@@ -23,5 +23,7 @@
         "no-alert": 1,
         "no-console": "off"
         
-      }
+      },
+      "ignorePatterns": ["node_modules/", "/__tests__"]
+
 }
