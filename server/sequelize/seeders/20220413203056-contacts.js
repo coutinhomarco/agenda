@@ -56,6 +56,11 @@ module.exports = {
         phoneNumber: '987654321',
 
       },
+      {
+        name: 'Juan Pablo',
+        email: 'pablojuan@yahoo.com',
+        phoneNumber: '987654321',
+      }
       ],
 
       {},

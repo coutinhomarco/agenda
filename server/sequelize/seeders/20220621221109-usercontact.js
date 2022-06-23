@@ -25,6 +25,18 @@ module.exports = {
         contactId: 1,
         userId: 2,
       },
+      {
+        contactId: 2,
+        userId: 2
+      },
+      {
+        contactId: 6,
+        userId: 1,
+      },
+      {
+        contactId: 4,
+        userId: 1,
+      }
 
     ]);
   },

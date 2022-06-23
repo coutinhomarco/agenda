@@ -20,6 +20,7 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "drop": "npx sequelize db:drop",
+    "populate":"npx sequelize db:seed:all",
     "create": "npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
     "all": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
     "test": "jest"
