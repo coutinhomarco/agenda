@@ -40,10 +40,11 @@ const findAll = async ({ userId }) => {
   return tasks;
 };
 
-const findByQuery = async ({ query }) => {
+const findByQuery = async ({ q }) => {
   const tasks = await Tasks.findAll({
+    attributes: ['taskId', 'userContactId', 'title', 'description', 'status', 'taskStartDate', 'taskEndDate'],
     where: {
-      title: { [Op.like]: `%${query}%` },
+      title: { [Op.like]: `%${q}%` },
     },
   });
   return tasks;
