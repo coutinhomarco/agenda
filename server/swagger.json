@@ -307,10 +307,200 @@
                     }
                 }
             }
+        },
+        "/tasks/search": {
+            "post": {
+                "parameters":                 [
+                    {
+                        "name": "query",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "summary": "Busca tarefas com base na query"
+        }},
+        "/tasks": {
+            "get": {
+                "summary": "Busca tarefas",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+                
+    }},
+    "/tasks/{contactId}": {
+        "get": {
+            "summary": "Busca tarefa",
+            "parameters": [
+                {
+                    "name": "contactId",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "Authorization",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "post": {
+            "summary": "Cria tarefa",
+            "parameters": [
+                {
+                    "name": "contactId",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "Authorization",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/newTask"
+                        }
+                    }
+                }
+            }
+        },
+        "put": {
+            "summary": "Atualiza tarefa",
+            "parameters": [
+                {
+                    "name": "contactId",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "Authorization",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/updateTask"
+                        }
+                    }
+                }
+            }
+        },
+        "delete": {
+            "summary": "Deleta tarefa",
+            "parameters": [
+                {
+                    "name": "contactId",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "Authorization",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ]
         }
     },
     "components": {
         "schemas": {
+            "newTask": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Buy milk"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Buy milk"
+
+                    },
+                    "taskStartDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2020-01-01"
+                    },
+                    "taskEndDate": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2020-01-01"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "tag": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                }
+            },
+            "updateTask": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Buy milk"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Buy milk"
+
+                    },
+                    "status": {
+                        "type": "integer",
+                        "example": 2
+                    }
+                }
+            },
             "userLogin": {
                 "type": "object",
                 "properties": {
@@ -479,12 +669,13 @@
                     "message": {
                         "type": "string",
                         "example": "Credenciais inválidas"
+                        }
                     }
                 }
             }
-            }
-            }
-            }
+        }
+    }
+}
         
     
 

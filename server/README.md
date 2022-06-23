@@ -26,10 +26,22 @@ $ npm install
 
 Renomeie o arquivo .env.example para .env e mude para suas variáveis locais
 
+exemplo:
+
+MYSQL_PASSWORD=1234567
+MYSQL_USER=root
+MYSQL_HOST=localhost
+MYSQL_DATABASE=agenda
+PORT=3001
+JWT_SECRET=123456
+
 # Para criar o banco de dados com seus dados iniciais
 $ npm run create
 # Caso queria apagar o banco para começar de novo basta executar
 $ npm run drop
+
+# Caso queria rodar os comandos drop e create junto basta executar
+$ npm run all
 
 # Execute a aplicação em modo de desenvolvimento
 $ npm run dev
@@ -38,8 +50,7 @@ $ npm run dev
 
 <h1>Endpoints:</h1>
 
-````
 Acesse
-localhost:3001/api-docs
+http://localhost:3001/api-docs
 para ver a documentação
-````
+

@@ -14,7 +14,7 @@
     "nodemon": "^2.0.15",
     "sequelize": "6.17.0",
     "sequelize-cli": "6.4.1",
-    "swagger-ui-express": "^4.4.0"
+    "swagger-ui-express": "4.4.0"
   },
   "scripts": {
     "start": "node app.js",
