@@ -20,9 +20,11 @@ const create = async (req, res, next) => {
 const destroy = async (req, res, next) => {
   try {
     const { contactId } = req.params;
+    const { userId } = req.tokenData;
     const contact = await Contact.findOne({ contactId });
     if (!contact) return res.status(404).json({ message: 'Contact not found' });
-    await Contact.destroy({ contactId }, next);
+    await Contact.destroy({ contactId });
+    await UserContact.destroy({ contactId, userId });
     return res.status(200).json({ message: 'Contact deleted successfully' });
   } catch (error) {
     next(error);

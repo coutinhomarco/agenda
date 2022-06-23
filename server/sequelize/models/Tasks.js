@@ -47,6 +47,15 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'Tasks',
     },
   );
-
+  Task.associate = (models) => {
+    Task.belongsToMany(
+      models.User,
+      { foreignKey: 'tasksId', as: 'taskUser', through: 'UserContact' },
+    );
+    Task.belongsToMany(
+      models.Contact,
+      { foreignKey: 'tasksId', as: 'taskContact', through: 'UserContact' },
+    );
+  };
   return Task;
 };

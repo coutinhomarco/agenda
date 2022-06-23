@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   Contact.associate = (models) => {
     Contact.belongsToMany(
       models.Tasks,
-      { foreignKey: 'tasksId', as: 'task', through: 'Tasks' },
+      { foreignKey: 'contactId', as: 'task', through: 'UserContact', otherKey: 'userId' },
     );
   };
 
