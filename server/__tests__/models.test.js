@@ -1,8 +1,8 @@
 const {execSync} = require('child_process')
-const Contact = require('../../models/Contact')
-const UserContact = require('../../models/UserContact')
-const User = require('../../models/User')
-const Tasks = require('../../models/Tasks')
+const Contact = require('../models/Contact')
+const UserContact = require('../models/UserContact')
+const User = require('../models/User')
+const Tasks = require('../models/Tasks')
 
 describe('Test the Contact model', () => {
     execSync('npm run all')

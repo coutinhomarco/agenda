@@ -1,6 +1,6 @@
-const {validateContactData} = require('../../middleware/contactValidate');
-const {validateName, validateUserData} = require('../../middleware/userValidate');
-const {validateBodyInfo, validateParams} = require('../../middleware/tasksValidate');
+const {validateContactData} = require('../middleware/contactValidate');
+const {validateName, validateUserData} = require('../middleware/userValidate');
+const {validateBodyInfo, validateParams} = require('../middleware/tasksValidate');
 describe('validate the contactValidate middleware', () => {
     it('should return a 400 error if the contact is not valid', async () => {
         const req = {
