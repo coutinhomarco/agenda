@@ -162,6 +162,11 @@ main{
   z-index: 9999999;
 }
 
+.update-form{
+  display: flex;
+  flex-direction: column;
+}
+
 .datepicker{
   height: 28px !important;
   border-radius: 0.25rem;

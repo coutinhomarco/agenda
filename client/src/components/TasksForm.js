@@ -28,6 +28,18 @@ export default function TasksForm() {
     });
   };
 
+  const validateFormField = () => {
+    const {
+      title, description, status, contact, tag,
+    } = inputDetails;
+    if (title?.length < 3) return true;
+    if (description?.length < 3) return true;
+    if (status < 0 || status > 2 || status === '') return true;
+    if (contact === '') return true;
+    if (tag === '') return true;
+    return false;
+  };
+
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -107,7 +119,7 @@ export default function TasksForm() {
 
         </select>
       </label>
-      <button className="btn btn-primary" type="submit">Submit</button>
+      <button disabled={validateFormField()} className="btn btn-primary" type="submit">Submit</button>
     </form>
   );
 }

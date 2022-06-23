@@ -24,7 +24,8 @@ export default function SelectedTask() {
     const fetchData = await fetch(`http://localhost:3001/contact/${extendedProps?.contactId}`, { headers: { Authorization: `Bearer ${localToken}` } });
     const jsonData = await fetchData.json();
     setContactInfo(jsonData);
-    const { tag } = extendedProps;
+    let { tag } = extendedProps;
+    tag = Number(tag);
     switch (tag) {
       case 0:
         return setTagString('Entertainment');
@@ -47,6 +48,7 @@ export default function SelectedTask() {
         .filter((task) => task?.id !== Number(id));
       setTasksList(remainingTasks);
       setSelectedTask(false);
+      toast.success('Task deleted', toastOption);
     } catch (error) {
       toast.error(error.message, toastOption);
     }
@@ -60,7 +62,11 @@ export default function SelectedTask() {
     <div className="selected-task">
       {
         isUpdating ? (
-          <UpdatingForm contactId={extendedProps.contactId} setIsUpdating={setIsUpdating} />
+          <UpdatingForm
+            contactId={extendedProps.contactId}
+            handleUpdateClick={handleUpdateClick}
+            setIsUpdating={setIsUpdating}
+          />
         ) : (
           <>
             <p>{`Title: ${title}`}</p>
