@@ -33,7 +33,7 @@ Funcionalidades implementadas:
     <li>Sistema de cadastro e login utilizando autenticação com JWTOKEN ✅</li>
     <li>Sistema de cadastro e deleção de contatos por usuario ✅</li>
     <li>Calendario com tasks relacionadas aos contatos ✅</li>
-    <li>Testes de front e back 🔧</li>
+    <li>Testes do back-end ✅</li>
 </ol>
 
 <img src='./client/images/login.gif'>
