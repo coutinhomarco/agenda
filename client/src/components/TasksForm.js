@@ -65,7 +65,6 @@ export default function TasksForm() {
         .then((json) => json);
       console.log(fetchData);
       const newTask = fetchData.data;
-      console.log(newTask);
       setTasksList([...tasksList, {
         title,
         id: Number(newTask.dataValues.taskId),

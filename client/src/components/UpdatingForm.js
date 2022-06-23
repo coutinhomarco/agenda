@@ -10,7 +10,7 @@ export default function UpdatingForm({ setIsUpdating, contactId, handleUpdateCli
     tasksList, setTasksList, selectedTask, setSelectedTask,
   } = useContext(Context);
 
-  const [inputData, setInputData] = useState({ title: '', description: '', status: 0 });
+  const [inputData, setInputData] = useState({ title: '', description: '', status: '' });
 
   const onChange = (e) => {
     setInputData({
@@ -23,7 +23,7 @@ export default function UpdatingForm({ setIsUpdating, contactId, handleUpdateCli
     const { title, description, status } = inputData;
     if (title.length < 3) return true;
     if (description.length < 3) return true;
-    if (status < 0 || status > 2) return true;
+    if (status === '') return true;
     return false;
   };
 
@@ -36,14 +36,15 @@ export default function UpdatingForm({ setIsUpdating, contactId, handleUpdateCli
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localToken}` },
         body: JSON.stringify({ ...inputData, taskId: selectedTask.id }),
       };
-      await fetch(`http://localhost:3001/tasks/${contactId}`, fetchMethod);
+      const a = await fetch(`http://localhost:3001/tasks/${contactId}`, fetchMethod);
+      if (a.status !== 200) return toast.error(a.statusText, toastOption);
       toast.success('Task updated', toastOption);
       const filteredTasks = tasksList.filter((task) => task.id !== selectedTask.id);
       setTasksList([...filteredTasks, { ...selectedTask, ...inputData }]);
       setSelectedTask({ ...selectedTask, ...inputData });
-      setIsUpdating(false);
+      return setIsUpdating(false);
     } catch (error) {
-      toast.error(error.message, toastOption);
+      return toast.error(error.message, toastOption);
     }
   };
 
