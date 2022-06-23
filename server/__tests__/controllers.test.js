@@ -91,8 +91,6 @@ describe('Test the Contact controller', () => {
 })
 
 describe('Test the User controller', () => {
-    execSync('npm run all')
-
     it('should create a new user', async () => {
         const req = {
             body: {
