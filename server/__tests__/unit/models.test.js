@@ -6,8 +6,8 @@ const Tasks = require('../../models/Tasks')
 
 describe('Test the Contact model', () => {
     execSync('npm run all')
-
     it('should create a new contact', async () => {
+
         const userId = 1
 
         const contactObject = {
@@ -25,7 +25,8 @@ describe('Test the Contact model', () => {
         expect(returnedObject).toMatchObject(contact);
     });
     it('should delete a contact', async () => {
-        const contactId = 1
+
+        const contactId = 3
 
         const contact = await Contact.findOne({ contactId } );
 
@@ -38,6 +39,7 @@ describe('Test the Contact model', () => {
         expect(contactDoenstExist).toBe(null);
     });
     it('should find all contacts', async () => {
+
         const userId = 1
 
         const allContacts = await Contact.findAll({ userId });
@@ -45,6 +47,7 @@ describe('Test the Contact model', () => {
         expect(allContacts).toBeDefined();
     })
     it('should find 6 contacts', async () => {
+
         const userId = 1
 
         const allContacts = await Contact.findAll({ userId });
@@ -89,7 +92,7 @@ describe('Test the User  model', () => {
         expect(userContact.dataValues.userId).toBe(4);
     })
     it('should delete a user', async () => {
-        const userId = 1
+        const userId = 3
         
         const user = await User.findOne({ userId });
 
@@ -128,9 +131,9 @@ describe('Test the UserContact model', () => {
     execSync('npm run all')
 
     it('should create a new userContact', async () => {
-        const userId = 3
+        const userId = 4
 
-        const contactId = 6
+        const contactId = 3
 
         const userContact = await UserContact.create({ userId, contactId });
 
@@ -156,7 +159,7 @@ describe('Test the Tasks model', () => {
         const userId = 1
 
         const taskObject = {
-            userContactId: 3,
+            userContactId: 1,
             title: 'Buy milk',
             description: 'Buy milk',
             taskStartDate: '2020-01-01',
@@ -198,8 +201,6 @@ describe('Test the Tasks model', () => {
         const allTasks = await Tasks.findAll({ userId });
 
         expect(allTasks).toBeDefined();
-
-        expect(allTasks[0]?.task?.dataValues).toBeDefined();
 
     })
     it('should find a task', async () => {
