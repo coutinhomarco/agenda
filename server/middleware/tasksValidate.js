@@ -11,10 +11,10 @@ const validateBodyInfo = (req, res, next) => {
     if (!description) {
       return res.status(400).json({ message: 'Description is required' });
     }
-    if (status > 2 || status < 0) {
+    if (status > 2 || status < 0 || !Number.isInteger(status)) {
       return res.status(400).json({ message: 'Status is required' });
     }
-    if (tagNumber > 3 || tagNumber < 0) {
+    if (tagNumber > 3 || tagNumber < 0 || !Number.isInteger(tagNumber)) {
       return res.status(400).json({ message: 'Tag is required' });
     }
     req.body.tag = tagNumber;
