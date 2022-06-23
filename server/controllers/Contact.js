@@ -1,5 +1,6 @@
 const Contact = require('../models/Contact');
 const UserContact = require('../models/UserContact');
+const { UserContact: userContactSequelize } = require('../sequelize/models');
 
 const create = async (req, res, next) => {
   try {
@@ -23,8 +24,8 @@ const destroy = async (req, res, next) => {
     const { userId } = req.tokenData;
     const contact = await Contact.findOne({ contactId });
     if (!contact) return res.status(404).json({ message: 'Contact not found' });
-    await Contact.destroy({ contactId });
-    await UserContact.destroy({ contactId, userId });
+    await Contact?.destroy({ contactId });
+    await userContactSequelize?.destroy({ where: { contactId, userId } });
     return res.status(200).json({ message: 'Contact deleted successfully' });
   } catch (error) {
     next(error);

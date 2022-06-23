@@ -10,22 +10,26 @@ export default function Contact({
   name, email, phoneNumber, contactId,
 }) {
   const [clicked, setClicked] = useState(false);
-  const { token, setContacts, contacts } = useContext(Context);
+  const {
+    setContacts, contacts,
+  } = useContext(Context);
 
   const handleClick = async () => {
     setClicked(!clicked);
   };
   const handleDelete = async () => {
     try {
-      await fetch(`http://localhost:3001/contact/${contactId}`, {
+      const localToken = localStorage.getItem('token');
+      const a = await fetch(`http://localhost:3001/contact/${contactId}`, {
         method: 'DELETE',
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${localToken}` },
       });
+      if (a.status !== 200) return toast.error('Contact not deleted', toastOption);
       const newList = contacts.filter(({ contactId: id }) => id !== contactId);
       toast.success('Contact deleted successfully', toastOption);
-      setContacts(newList);
+      return setContacts(newList);
     } catch (error) {
-      toast.error(error.message, toastOption);
+      return toast.error(error.message, toastOption);
     }
   };
   return (
