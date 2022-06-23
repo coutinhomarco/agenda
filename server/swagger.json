@@ -328,11 +328,107 @@
                         }
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de tarefas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "tasks": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "title": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "createdAt": {
+                                                        "type": "string"
+                                                    },
+                                                    "updatedAt": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro ao realizar busca",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "summary": "Busca tarefas com base na query"
-        }},
+        }
+    },
         "/tasks": {
             "get": {
                 "summary": "Busca tarefas",
+                "responses": {
+                    "200": {
+                        "description": "Lista de tarefas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "tasks": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "title": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "createdAt": {
+                                                        "type": "string"
+                                                    },
+                                                    "updatedAt": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "parameters": [
                     {
                         "name": "Authorization",
@@ -343,8 +439,8 @@
                         }
                     }
                 ]
-                
-    }},
+                }     
+    },
     "/tasks/{contactId}": {
         "get": {
             "summary": "Busca tarefa",
@@ -448,7 +544,8 @@
                 }
             ]
         }
-    },
+    }
+},
     "components": {
         "schemas": {
             "newTask": {
@@ -461,7 +558,7 @@
                     "description": {
                         "type": "string",
                         "example": "Buy milk"
-
+    
                     },
                     "taskStartDate": {
                         "type": "string",
@@ -493,7 +590,7 @@
                     "description": {
                         "type": "string",
                         "example": "Buy milk"
-
+    
                     },
                     "status": {
                         "type": "integer",
@@ -674,8 +771,9 @@
                 }
             }
         }
-    }
 }
+
+
         
     
 
