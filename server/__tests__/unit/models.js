@@ -1,6 +1,7 @@
 const {execSync} = require('child_process')
 const Contact = require('../../models/Contact')
 const UserContact = require('../../models/UserContact')
+const User = require('../../models/User')
 
 describe('Test the Contact model', () => {
     execSync('npm run all')
@@ -48,3 +49,41 @@ describe('Test the Contact model', () => {
         expect(contact).toBeDefined();
     })
 });
+describe('Test the User  model', () => {
+    execSync('npm run all')
+    it('should create a new user', async () => {
+        const userDetails = {
+            name: 'Julia Roberts',
+            email: 'roberts@gmail.com',
+            password: '123456789',
+        }
+        const userContact = await User.create(userDetails);
+        expect(userContact).toBeDefined();
+        expect(userContact.dataValues).toMatchObject(userDetails);
+        expect(userContact.dataValues.userId).toBe(4);
+    })
+    it('should delete a user', async () => {
+        const userId = 1
+        const user = await User.findOne({ userId });
+        if (!user) return expect(user).toBe(null);
+        await User.destroy( { userId })
+        const userDoenstExist = await User.findOne({ userId });
+        expect(userDoenstExist).toBe(null);
+    })
+    it('should find all users', async () => {
+        const allUsers = await User.findAll();
+        expect(allUsers).toBeDefined();
+
+    })
+    it('should find 3 users', async () => {
+        const allUsers = await User.findAll();
+        expect(allUsers.length).toBe(3);
+    })
+    it('should find a user', async () => {
+        const userId = 1
+        const user = await User.findOne({ userId });
+        if (!user) return expect(user).toBe(null);
+        expect(user).toBeDefined();
+    })
+})
+describe('Test the UserContact model', () => {})
