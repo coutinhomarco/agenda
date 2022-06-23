@@ -47,12 +47,13 @@ export default function TasksForm() {
         contact, title, description, status, tag,
       } = inputDetails;
       const body = {
-        contact,
+        contact: Number(contact),
         title,
         description,
         status: Number(status),
         taskStartDate,
         taskEndDate,
+        tag: Number(tag),
       };
       const fetchMethod = {
         method: 'POST',
@@ -62,6 +63,7 @@ export default function TasksForm() {
       const fetchData = await fetch(`http://localhost:3001/tasks/${contact}`, fetchMethod)
         .then((response) => response.json())
         .then((json) => json);
+      console.log(fetchData);
       const newTask = fetchData.data;
       console.log(newTask);
       setTasksList([...tasksList, {

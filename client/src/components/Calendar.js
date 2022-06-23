@@ -23,7 +23,6 @@ export default function Calendar() {
     };
     const response = await fetch('http://localhost:3001/tasks', fetchMethod).then((res) => res.json());
     const tasks = response.map(({ task, contactId }) => ({ ...task, contactId }));
-    console.log(tasks, response);
     const taskArray = tasks
       .map(({
         taskId, title, taskStartDate: start, taskEndDate: end, contactId, description, tag,
