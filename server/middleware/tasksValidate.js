@@ -4,20 +4,27 @@ const validateBodyInfo = (req, res, next) => {
     const {
       title, description, status, tag,
     } = req.body;
+    const statusNumber = Number(status);
+
     const tagNumber = Number(tag);
     if (!title) {
       return res.status(400).json({ message: 'Title is required' });
     }
+
     if (!description) {
       return res.status(400).json({ message: 'Description is required' });
     }
-    if (status > 2 || status < 0 || !Number.isInteger(status)) {
+
+    if (statusNumber > 2 || statusNumber < 0) {
       return res.status(400).json({ message: 'Status is required' });
     }
-    if (tagNumber > 3 || tagNumber < 0 || !Number.isInteger(tagNumber)) {
+
+    if (tagNumber > 3 || tagNumber < 0) {
       return res.status(400).json({ message: 'Tag is required' });
     }
+    console.log('passou aqui');
     req.body.tag = tagNumber;
+
     next();
   } catch (error) {
     next(error);
