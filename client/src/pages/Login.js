@@ -7,7 +7,7 @@ import toastOption from '../toastifyOptions';
 
 export default function Login() {
   const [inputData, setInputData] = useState({ password: '', email: '' });
-  const { setToken, setUserDetails } = useContext(Context);
+  const { setUserDetails } = useContext(Context);
 
   const history = useHistory();
 
@@ -36,7 +36,6 @@ export default function Login() {
         .then((response) => response.json())
         .then((json) => json);
       if (!fetchData.token) { return toast.error(fetchData.message, toastOption); }
-      setToken(fetchData.token);
       toast.success(fetchData.message, toastOption);
       setUserDetails(fetchData.userDetails);
       localStorage.setItem('token', fetchData.token);
