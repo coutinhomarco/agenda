@@ -101,9 +101,7 @@ const findAll = async (req, res, next) => {
 const findByQuery = async (req, res, next) => {
   try {
     const { q } = req.query;
-    console.log(q);
     const tasks = await Tasks.findByQuery({ q });
-    console.log(tasks);
     return res.status(200).json(tasks);
   } catch (error) {
     next(error);
