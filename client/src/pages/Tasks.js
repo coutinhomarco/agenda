@@ -30,14 +30,18 @@ export default function Tasks() {
     });
   };
 
+  const cleanLocalStorageAndContext = () => {
+    localStorage.removeItem('userDetails');
+    localStorage.removeItem('token');
+    localStorage.removeItem('contacts');
+    setToken(undefined);
+    setUserDetails({});
+    setContacts([]);
+  };
+
   const handleLogout = async () => {
     try {
-      setToken(undefined);
-      setUserDetails({});
-      setContacts([]);
-      localStorage.removeItem('token');
-      localStorage.removeItem('userDetails');
-      localStorage.removeItem('contacts');
+      cleanLocalStorageAndContext();
       toast.success('Logout Successful', toastOption);
       history.push('/');
     } catch (error) {
