@@ -28,6 +28,15 @@ module.exports = (sequelize) => {
       as: 'UserContact',
       foreignKey: 'userContactId',
     });
+    models.UserContact.belongsTo(models.Contact, {
+      as: 'contactUserC',
+      foreignKey: 'contactId',
+    });
+
+    models.Contact.hasMany(models.UserContact, {
+      as: 'UserContact',
+      foreignKey: 'userContactId',
+    });
     models.UserContact.hasOne(models.Tasks, {
       as: 'task',
       foreignKey: 'userContactId',
