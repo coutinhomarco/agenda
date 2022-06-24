@@ -12,10 +12,10 @@ module.exports = {
       },
       {
         userContactId: 2,
-        title: 'Buy food for the dinner',
-        description: 'Buy food for the dinner',
+        title: 'Make tests for the front-end',
+        description: 'Create unit tests',
         status: 0,
-        tag: 1,
+        tag: 3,
         taskStartDate: new Date(),
         taskEndDate: new Date(),
       },
