@@ -20,6 +20,7 @@ const destroy = async ({ contactId }) => {
 const findAll = async ({ userId }) => {
   const allContacts = await User.findAll({
     where: { userId },
+    attributes: { exclude: ['password'] },
     include: [
       {
         model: Contact, as: 'contact', through: UserContact, required: true, attribute: ['contact'],

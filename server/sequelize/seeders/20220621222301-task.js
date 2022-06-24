@@ -7,8 +7,8 @@ module.exports = {
         description: 'Buy milk for the family',
         status: 0,
         tag: 1,
-        taskStartDate: new Date(),
-        taskEndDate: new Date(),
+        taskStartDate: new Date('2022-06-29 14:45'),
+        taskEndDate: new Date('2022-06-29 15:45'),
       },
       {
         userContactId: 2,

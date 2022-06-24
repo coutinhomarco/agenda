@@ -17,17 +17,16 @@ export default function Agenda() {
   useEffect(async () => {
     try {
       const localToken = localStorage.getItem('token');
+      const localUserDetails = localStorage.getItem('userDetails');
+      setUserDetails(JSON.parse(localUserDetails));
       const fetchData = await fetch('http://localhost:3001/contact', { headers: { Authorization: `Bearer ${token || localToken}` } });
       const [jsonData] = await fetchData.json();
       const contact = jsonData?.contact;
-      if (!userDetails.name) {
-        const localUserDetails = localStorage.getItem('userDetails');
-        setUserDetails(JSON.parse(localUserDetails));
-      }
+      if (!contact) return toast.error('No contacts found', toastOption);
       setContacts(contact?.sort((a, b) => a.contactId - b.contactId));
-      localStorage.setItem('contacts', JSON.stringify(contact?.sort((a, b) => a.contactId - b.contactId)));
+      return localStorage.setItem('contacts', JSON.stringify(contact?.sort((a, b) => a.contactId - b.contactId)));
     } catch (error) {
-      toast.error(error.message, toastOption);
+      return toast.error(error.message, toastOption);
     }
   }, []);
 
@@ -74,7 +73,7 @@ export default function Agenda() {
           </section>
           )}
           <aside className="center">
-            {contacts ? contacts.sort((a, b) => (a.name > b.name ? 1 : -1))
+            {contacts.length > 0 ? contacts.sort((a, b) => (a.name > b.name ? 1 : -1))
               .map((contact) => (
                 <Contact
                   key={contact?.contactId}
