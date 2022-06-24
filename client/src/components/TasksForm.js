@@ -29,14 +29,17 @@ export default function TasksForm() {
   };
 
   const validateFormField = () => {
+    const statusPossibilities = ['0', '1', '2'];
+    const tagPossibilities = ['0', '1', '2', '3'];
+
     const {
       title, description, status, contact, tag,
     } = inputDetails;
-    if (title?.length < 3) return true;
-    if (description?.length < 3) return true;
-    if (status < 0 || status > 2 || status === '') return true;
-    if (contact === '') return true;
-    if (tag === '') return true;
+    if (!title || title.length < 3) return true;
+    if (description?.length < 3 || !title) return true;
+    if (!statusPossibilities.some((el) => el === status)) return true;
+    if (contact === '' || !contact) return true;
+    if (!tagPossibilities.some((el) => el === tag)) return true;
     return false;
   };
 
