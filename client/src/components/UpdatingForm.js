@@ -20,10 +20,11 @@ export default function UpdatingForm({ setIsUpdating, contactId, handleUpdateCli
   };
 
   const validateFormField = () => {
+    const possibilities = ['0', '1', '2'];
     const { title, description, status } = inputData;
     if (title.length < 3) return true;
     if (description.length < 3) return true;
-    if (status === '') return true;
+    if (!possibilities.some((el) => el === status)) return true;
     return false;
   };
 
