@@ -6,19 +6,19 @@ const validateBodyInfo = (req, res, next) => {
     const statusNumber = Number(status);
     const tagNumber = Number(tag);
 
-    if (!title) {
+    if (!title || title === '') {
       return res.status(400).json({ message: 'Title is required' });
     }
 
-    if (!description) {
+    if (!description || description === '') {
       return res.status(400).json({ message: 'Description is required' });
     }
 
-    if (statusNumber > 2 || statusNumber < 0) {
+    if (statusNumber > 2 || statusNumber < 0 || status === '') {
       return res.status(400).json({ message: 'Status is required' });
     }
 
-    if (tagNumber > 3 || tagNumber < 0) {
+    if (tagNumber > 3 || tagNumber < 0 || tag === '') {
       return res.status(400).json({ message: 'Tag is required' });
     }
     req.body.tag = tagNumber;

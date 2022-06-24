@@ -1,8 +1,6 @@
 const { User } = require('../sequelize/models');
 
-const create = async ({ name, email, password }) => {
-  await User.create({ name, email, password });
-};
+const create = async ({ name, email, password }) => User.create({ name, email, password });
 
 const destroy = async ({ userId }) => {
   await User.destroy({

@@ -1,11 +1,10 @@
-const {execSync} = require('child_process')
 const Contact = require('../models/Contact')
 const UserContact = require('../models/UserContact')
 const User = require('../models/User')
 const Tasks = require('../models/Tasks')
 
 describe('Test the Contact model', () => {
-    execSync('npm run all')
+
     it('should create a new contact', async () => {
 
         const userId = 1
@@ -46,7 +45,7 @@ describe('Test the Contact model', () => {
 
         expect(allContacts).toBeDefined();
     })
-    it('should find 6 contacts', async () => {
+    it('should find 7 contacts', async () => {
 
         const userId = 1
 
@@ -58,11 +57,10 @@ describe('Test the Contact model', () => {
             dataValues
         })
 
-        expect(oi.length).toBe(6);
+        expect(oi.length).toBe(7);
         
     })
     it('should find a contact', async () => {
-        execSync('npm run all')
 
         const contactId = 1
 
@@ -74,7 +72,6 @@ describe('Test the Contact model', () => {
     })
 });
 describe('Test the User  model', () => {
-    execSync('npm run all')
 
     it('should create a new user', async () => {
         const userDetails = {
@@ -89,7 +86,7 @@ describe('Test the User  model', () => {
 
         expect(userContact.dataValues).toMatchObject(userDetails);
 
-        expect(userContact.dataValues.userId).toBe(4);
+        expect(userContact.dataValues.userId).toBe(2);
     })
     it('should delete a user', async () => {
         const userId = 3
@@ -110,12 +107,12 @@ describe('Test the User  model', () => {
         expect(allUsers).toBeDefined();
 
     })
-    it('should find 3 users', async () => {
+    it('should find 2 users', async () => {
         const allUsers = await User.findAll()
 
         expect(allUsers).toBeDefined();
 
-        expect(allUsers.length).toBe(3);
+        expect(allUsers.length).toBe(2);
     })
     it('should find a user', async () => {
         const userId = 1
@@ -128,14 +125,13 @@ describe('Test the User  model', () => {
     })
 })
 describe('Test the UserContact model', () => {
-    execSync('npm run all')
 
     it('should create a new userContact', async () => {
-        const userId = 4
+        const userId = 1
 
-        const contactId = 3
+        const contactId = 8
 
-        const userContact = await UserContact.create({ userId, contactId });
+        const userContact = await UserContact?.create({ userId, contactId });
 
         expect(userContact).toBeDefined();
 
@@ -154,12 +150,11 @@ describe('Test the UserContact model', () => {
     })
 })
 describe('Test the Tasks model', () => {
-    execSync('npm run all')
     it('should create a new task', async () => {
         const userId = 1
 
         const taskObject = {
-            userContactId: 1,
+            userContactId: 6,
             title: 'Buy milk',
             description: 'Buy milk',
             taskStartDate: '2020-01-01',

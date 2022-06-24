@@ -3,7 +3,6 @@ const User = require('../controllers/User')
 const Contact = require('../controllers/Contact')
 
 describe('Test the Contact controller', () => {
-    execSync('npm run all')
     it('should create a new contact', async () => {
         const body = {name: 'Ana Luisa', email:'ana@gmail.com', phoneNumber: '987654321', userId: 1}
 
@@ -113,7 +112,7 @@ describe('Test the User controller', () => {
 
         expect(res.status).toBeDefined()
 
-        expect(newUser).toBe(undefined)
+        expect(newUser).toBeDefined()
     })
 
     it('should login a user', async () => {

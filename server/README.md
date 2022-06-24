@@ -36,6 +36,12 @@ MYSQL_DATABASE=agenda
 PORT=3001
 JWT_SECRET=123456
 
+```
+
+Para rodar a aplicação é necessário estar com o mysql rodando em sua máquina
+
+```bash
+
 # Para criar o banco de dados com seus dados iniciais
 $ npm run create
 # Caso queria apagar o banco para começar de novo basta executar
@@ -48,6 +54,15 @@ $ npm run all
 $ npm run dev
 
 ```
+
+<h1>Testes</h1>
+
+Para rodar os testes siga os passos:
+
+<ol>
+    <li>Acesse a pasta do server com cd server</li>
+    <li>Execute 'npm run teste' de forma a popular o banco e executar os devidos testes</li>
+</ol>
 
 <h1>Endpoints:</h1>
 

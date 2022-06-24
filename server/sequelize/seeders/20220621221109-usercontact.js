@@ -30,10 +30,6 @@ module.exports = {
         userId: 1,
       }
       ,
-      {
-        contactId: 5,
-        userId: 1,
-      },
 
     ]);
   },

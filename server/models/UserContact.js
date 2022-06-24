@@ -5,7 +5,7 @@ const {
 } = require('../sequelize/models');
 
 const create = async ({ userId, contactId }) => {
-  const userContact = await UserContact.create({
+  const userContact = await UserContact?.create({
     userId, contactId,
   });
   return userContact;

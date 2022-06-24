@@ -183,6 +183,7 @@ describe('validate the tasksValidate middleware', () => {
                 title: 'title',
                 description: 'description',
                 status: 0,
+                tag: ''
             }
         }
 
