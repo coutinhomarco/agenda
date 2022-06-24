@@ -34,6 +34,7 @@ export default function Tasks() {
     localStorage.removeItem('userDetails');
     localStorage.removeItem('token');
     localStorage.removeItem('contacts');
+    localStorage.removeItem('tasks');
     setToken(undefined);
     setUserDetails({});
     setContacts([]);
@@ -75,7 +76,6 @@ export default function Tasks() {
 
   const fetchTasks = async () => {
     const localStorageToken = localStorage.getItem('token');
-    setToken(localStorageToken);
     const fetchMethod = {
       method: 'GET',
       headers: { Authorization: `Bearer ${localStorageToken}`, 'Content-Type': 'application/json' },
