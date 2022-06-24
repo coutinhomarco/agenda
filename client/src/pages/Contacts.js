@@ -19,13 +19,13 @@ export default function Agenda() {
       const localToken = localStorage.getItem('token');
       const fetchData = await fetch('http://localhost:3001/contact', { headers: { Authorization: `Bearer ${token || localToken}` } });
       const [jsonData] = await fetchData.json();
-      const { contact } = jsonData;
+      const contact = jsonData?.contact;
       if (!userDetails.name) {
         const localUserDetails = localStorage.getItem('userDetails');
         setUserDetails(JSON.parse(localUserDetails));
       }
-      setContacts(contact.sort((a, b) => a.contactId - b.contactId));
-      localStorage.setItem('contacts', JSON.stringify(contact.sort((a, b) => a.contactId - b.contactId)));
+      setContacts(contact?.sort((a, b) => a.contactId - b.contactId));
+      localStorage.setItem('contacts', JSON.stringify(contact?.sort((a, b) => a.contactId - b.contactId)));
     } catch (error) {
       toast.error(error.message, toastOption);
     }
@@ -74,7 +74,7 @@ export default function Agenda() {
           </section>
           )}
           <aside className="center">
-            {contacts.sort((a, b) => (a.name > b.name ? 1 : -1))
+            {contacts ? contacts.sort((a, b) => (a.name > b.name ? 1 : -1))
               .map((contact) => (
                 <Contact
                   key={contact?.contactId}
@@ -83,7 +83,8 @@ export default function Agenda() {
                   phoneNumber={contact?.phoneNumber}
                   contactId={contact?.contactId}
                 />
-              ))}
+              ))
+              : <h2 style={{ color: 'white' }}>Opss this seems a little empty...</h2>}
           </aside>
         </div>
       </main>
