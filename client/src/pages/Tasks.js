@@ -73,28 +73,53 @@ export default function Tasks() {
     setTasksList(taskArray);
   };
 
+  const fetchTasks = async () => {
+    const localStorageToken = localStorage.getItem('token');
+    setToken(localStorageToken);
+    const fetchMethod = {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${localStorageToken}`, 'Content-Type': 'application/json' },
+    };
+    const response = await fetch('http://localhost:3001/tasks', fetchMethod).then((res) => res.json());
+    console.log(response);
+    const tasks = response.map(({ task, contactId }) => ({ ...task, contactId }));
+    const taskArray = tasks
+      .map(({
+        taskId, title, taskStartDate: start, taskEndDate: end, contactId, description, tag,
+      }) => ({
+        id: taskId, title, start, end, description, extendedProps: { contactId, tag },
+      }));
+    setTasksList(taskArray);
+  };
+
   const handleContactClick = () => {
     history.push('/contacts');
   };
 
   return (
     <div className="tasks-container">
-      <header className="tasks-header">
-        <h1>
-          {userDetails.name}
-          &apos;s tasks
-        </h1>
-        {
+      <header>
+        <section className="tasks-header">
+          <h1>
+            {userDetails.name}
+            &apos;s tasks
+          </h1>
+
+          <button className="btn btn-primary" onClick={handleSearchButtonClick} type="button">Search tasks</button>
+          <button className="btn btn-secondary" onClick={handleContactClick} type="button">Contacts</button>
+          <button className="btn btn-danger" onClick={handleLogout} type="button">Log out</button>
+        </section>
+        <section id="search-tasks">
+          {
           isSearching && (
             <>
               <input placeholder="Search for tasks" name="search" onChange={onChange} type="text" />
               <button className="btn btn-primary" onClick={handleSearchSubmit} type="button">Search</button>
+              <button className="btn btn-warning" onClick={fetchTasks} type="button">Clear filter</button>
             </>
           )
         }
-        <button className="btn btn-primary" onClick={handleSearchButtonClick} type="button">Search tasks</button>
-        <button className="btn btn-secondary" onClick={handleContactClick} type="button">Contacts</button>
-        <button className="btn btn-danger" onClick={handleLogout} type="button">Log out</button>
+        </section>
       </header>
       <Calendar />
     </div>
