@@ -32,7 +32,7 @@ $ npm start
 
 ```
 
-Entre com o usuários já criados (o banco já está populado):
+Entre com o usuário já criado (o banco já está populado):
 
 ````
     {
